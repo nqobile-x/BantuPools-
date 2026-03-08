@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="format-detection" content="telephone=no">
+  <!-- CSP: strict resource policy -->
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self';">
+  <!-- Permissions-Policy: disable unused browser APIs -->
+  <meta http-equiv="Permissions-Policy"
+    content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
+
+  <title>Bantu Pools — Services Detail</title>
+  <meta name="description" content="Explore Bantu Pools expert services: comprehensive pool cleaning & maintenance, professional equipment repairs, and complete renovations & resurfacing. Free site inspections available.">
+  <meta name="keywords" content="pool cleaning, pool maintenance, pool equipment repairs, pool renovations, pool resurfacing, Bantu Pools services, South Africa">
+  <meta name="author" content="Bantu Pools">
+
+  <!-- Open Graph / Social Media Tags -->
+  <meta property="og:title" content="Bantu Pools | Our Services">
+  <meta property="og:description" content="Expert pool cleaning, maintenance, repairs, and renovations by Bantu Pools.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.bantupools.co.za/services.html">
+  <meta property="og:image" content="https://www.bantupools.co.za/Images/Bantu%20pools%20Logo.png">
+
+  <!-- JSON-LD Structured Data for AI & Search Engines -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "serviceType": "Swimming Pool Maintenance and Repair",
+    "provider": {
+      "@type": "HomeAndConstructionBusiness",
+      "name": "Bantu Pools",
+      "image": "https://www.bantupools.co.za/Images/Bantu%20pools%20Logo.png",
+      "telephone": "+27836883238",
+      "url": "https://www.bantupools.co.za/"
+    },
+    "areaServed": {
+      "@type": "Place",
+      "name": "South Africa"
+    },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Pool Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pool Cleaning & Maintenance"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Equipment Repairs"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Renovations & Resurfacing"
+          }
+        }
+      ]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Bantu Pools Home">
+        <img src="images/Logo/Bantu%20pools%20%20Logo.png" alt="Bantu Pools Logo" height="50" class="nav__logo-img">
+      </a>
+
+      <div class="nav__links" id="navLinks">
+        <a href="index.html" class="nav__link">Home</a>
+        <a href="services.html" class="nav__link nav__link--active">Services</a>
+        <a href="index.html#projects" class="nav__link">Gallery</a>
+        <a href="#contact-cta" class="nav__link">Contact</a>
+        <a href="#contact-cta" class="btn btn--primary nav__cta">Get a Quote</a>
+      </div>
+
+      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== SERVICES HERO ===== -->
+  <section class="services-hero">
+    <div class="container">
+      <h1 class="services-hero__title animate-on-scroll">
+        Expert Pool Care.<br><span>Crystal Clear Results.</span>
+      </h1>
+      <p class="services-hero__desc animate-on-scroll delay-1">
+        From weekly cleaning to full renovations, we keep your pool pristine all year round. Reliable, professional, and
+        detail-oriented.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SERVICE TABS ===== -->
+  <section class="section" id="services-content">
+    <div class="container">
+      <div class="service-tabs animate-on-scroll">
+        <button class="service-tab service-tab--active" data-tab="cleaning" type="button">
+          <span class="material-symbols-outlined">cleaning_services</span>
+          Cleaning &amp; Maintenance
+        </button>
+        <button class="service-tab" data-tab="repairs" type="button">
+          <span class="material-symbols-outlined">build</span>
+          Equipment Repairs
+        </button>
+        <button class="service-tab" data-tab="renovations" type="button">
+          <span class="material-symbols-outlined">grid_view</span>
+          Renovations &amp; Resurfacing
+        </button>
+      </div>
+
+      <!-- ===== CLEANING TAB ===== -->
+      <div class="service-detail active" id="cleaning">
+        <div class="service-detail__header">
+          <div class="service-detail__image animate-on-scroll">
+            <img src="images/Scrub%20Clean.png" alt="Professional pool cleaning and scrubbing service" width="600" height="450"
+              loading="lazy">
+          </div>
+          <div class="service-detail__info animate-on-scroll delay-1">
+            <p class="section-eyebrow">Service Detail</p>
+            <h2 class="section-title">Cleaning &amp; Maintenance</h2>
+            <p>
+              Our weekly cleaning service ensures your water is balanced, safe, and inviting. We handle the chemistry
+              and the grunt work so you can simply enjoy the swim.
+            </p>
+          </div>
+        </div>
+
+        <div class="sub-services">
+          <div class="sub-service animate-on-scroll">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Chemical Balancing</h4>
+              <p class="sub-service__desc">Precise testing and adjustment of chlorine and pH levels.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-1">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Debris Removal</h4>
+              <p class="sub-service__desc">Skimming surface and vacuuming the pool floor.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-2">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Basket Emptying</h4>
+              <p class="sub-service__desc">Cleaning out pump and skimmer baskets to ensure flow.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-3">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Tile Brushing</h4>
+              <p class="sub-service__desc">Scrubbing waterline tiles to prevent calcium buildup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== REPAIRS TAB ===== -->
+      <div class="service-detail" id="repairs">
+        <div class="service-detail__header">
+          <div class="service-detail__image animate-on-scroll">
+            <img src="images/repairs_and_maintainance.png" alt="Pool equipment repair and maintenance service" width="600" height="450" loading="lazy">
+          </div>
+          <div class="service-detail__info animate-on-scroll delay-1">
+            <p class="section-eyebrow">Service Detail</p>
+            <h2 class="section-title">Equipment Repairs</h2>
+            <p>
+              Don't let a broken pump ruin your summer. Our expert technicians diagnose and fix equipment issues quickly
+              to prevent further damage and restore circulation.
+            </p>
+          </div>
+        </div>
+
+        <div class="sub-services">
+          <div class="sub-service animate-on-scroll">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Pump Diagnostics</h4>
+              <p class="sub-service__desc">Troubleshooting motor noise, leaks, and flow issues.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-1">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Filter Cleaning</h4>
+              <p class="sub-service__desc">Deep cleaning cartridges or sand replacement.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-2">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Leak Detection</h4>
+              <p class="sub-service__desc">Advanced pressure testing to find hidden water loss.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-3">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Heater Repair</h4>
+              <p class="sub-service__desc">Fixing gas or electric heaters for year-round swimming.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== RENOVATIONS TAB ===== -->
+      <div class="service-detail" id="renovations">
+        <div class="service-detail__header">
+          <div class="service-detail__image animate-on-scroll">
+            <img src="images/Renovations_pool.png" alt="Pool renovation and resurfacing" width="600" height="450"
+              loading="lazy">
+          </div>
+          <div class="service-detail__info animate-on-scroll delay-1">
+            <p class="section-eyebrow">Service Detail</p>
+            <h2 class="section-title">Renovations &amp; Resurfacing</h2>
+            <p>
+              Transform your aging pool into a modern oasis. We specialize in aesthetic upgrades and structural repairs
+              that add value to your home and fresh life to your backyard.
+            </p>
+          </div>
+        </div>
+
+        <div class="sub-services">
+          <div class="sub-service animate-on-scroll">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Surface Replastering</h4>
+              <p class="sub-service__desc">Smooth, durable finishes in quartz, pebble, or plaster.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-1">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Modern Tiling</h4>
+              <p class="sub-service__desc">Glass and ceramic tile installation for a contemporary look.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-2">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">LED Lighting</h4>
+              <p class="sub-service__desc">Energy-efficient color-changing pool lights.</p>
+            </div>
+          </div>
+
+          <div class="sub-service animate-on-scroll delay-3">
+            <div class="sub-service__check">
+              <span class="material-symbols-outlined">check</span>
+            </div>
+            <div>
+              <h4 class="sub-service__title">Coping Repair</h4>
+              <p class="sub-service__desc">Repairing the stone or concrete edge of your pool.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIAL ===== -->
+  <section class="testimonial">
+    <div class="container">
+      <p class="testimonial__quote animate-on-scroll">
+        Best service in the area! My pool has never looked better. The team is professional, punctual, and incredibly
+        thorough.
+      </p>
+      <p class="testimonial__author animate-on-scroll delay-1">— Sarah J.</p>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="cta" id="contact-cta">
+    <div class="container cta__content">
+      <h2 class="cta__title animate-on-scroll">Ready to dive in?</h2>
+      <p class="cta__desc animate-on-scroll delay-1">
+        Whether it's a quick fix or a complete makeover, we're here to help. Schedule your free site inspection today.
+      </p>
+      <div class="cta__actions animate-on-scroll delay-2">
+        <a href="https://wa.me/27836883238" class="btn btn--white btn--lg" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">chat</span>
+          WhatsApp Us
+        </a>
+        <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20quote%20please" class="btn btn--outline-light btn--lg" target="_blank" rel="noopener noreferrer">
+          <span class="material-symbols-outlined">request_quote</span>
+          Get a Quote
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <a href="index.html" class="nav__logo nav__logo--light">
+            <img src="images/Logo/Bantu%20pools%20%20Logo.png" alt="Bantu Pools Logo" height="50" class="nav__logo-img">
+          </a>
+          <p class="footer__brand-desc">
+            Professional pool services dedicated to keeping your water crystal clear and your equipment running
+            smoothly. Licensed &amp; Insured.
+          </p>
+          <div class="footer__social">
+            <a href="#" class="footer__social-link" aria-label="Facebook" rel="noopener noreferrer">
+              <span class="material-symbols-outlined">public</span>
+            </a>
+            <a href="https://wa.me/27836883238" class="footer__social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined">chat</span>
+            </a>
+            <a href="https://wa.me/27836883238" class="footer__social-link" aria-label="WhatsApp Chat" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined">forum</span>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer__title">Services</h4>
+          <div class="footer__links">
+            <a href="#cleaning" class="footer__link">Cleaning</a>
+            <a href="#repairs" class="footer__link">Repairs</a>
+            <a href="#renovations" class="footer__link">Renovations</a>
+            <a href="#" class="footer__link">Commercial</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer__title">Company</h4>
+          <div class="footer__links">
+            <a href="#" class="footer__link">About Us</a>
+            <a href="#" class="footer__link">Careers</a>
+            <a href="#" class="footer__link">Blog</a>
+            <a href="#contact-cta" class="footer__link">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer__title">Connect</h4>
+          <div class="footer__links">
+            <a href="https://wa.me/27836883238" class="footer__link" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined icon--inline">chat</span>
+              WhatsApp Us
+            </a>
+            <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20to%20enquire%20about%20your%20services" class="footer__link" target="_blank" rel="noopener noreferrer">
+              <span class="material-symbols-outlined icon--inline">forum</span>
+              +27 83 688 3238
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>&copy; 2026 Bantu Pools. All rights reserved.</span>
+        <div class="footer__bottom-links">
+          <a href="#" class="footer__link">Privacy Policy</a>
+          <a href="#" class="footer__link">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+
+</html>

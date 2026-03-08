@@ -1,0 +1,17 @@
+{
+  "name": "bantu-pools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bantu Pools — Professional Pool Services Website",
+  "scripts": {
+    "build": "tsc",
+    "dev": "npx -y concurrently \"tsc --watch\" \"npx -y serve -l 8080\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "gsap": "^3.14.2"
+  }
+}
