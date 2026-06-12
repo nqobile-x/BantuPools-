@@ -1,0 +1,8 @@
+# Keep deploys lean — exclude originals, one-off scripts and tooling
+Images
+scripts
+*.py
+migrate.js
+copy_assets.bat
+# Unoptimized source PNGs (site uses assets/img/*.webp); keep assets/logo
+assets/*.png

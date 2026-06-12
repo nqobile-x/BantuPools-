@@ -1,104 +1,14 @@
 /**
  * Bantu Pools — Main TypeScript
- * Handles: scroll animations, nav, service tabs, stat counters, security & privacy.
- * All event listeners attached via addEventListener — zero inline handlers.
+ * Handles: nav, scroll reveals, stat counters, ARIA tabs,
+ * before/after slider, gallery controls, privacy hardening.
+ * All listeners attached via addEventListener — zero inline handlers.
  */
 
 'use strict';
 
 /* ================================================
-   1. TYPES & INTERFACES & GLOBALS
-   ================================================ */
-
-/** Global GSAP instance loaded via CDN/vendor script */
-declare const gsap: any;
-
-/** Shape of a form validation field. */
-interface FormFieldConfig {
-  readonly id: string;
-  readonly validator: RegExp;
-  readonly msg: string;
-}
-
-/** Sanitised form data ready for submission. */
-interface SanitisedFormData {
-  readonly name: string;
-  readonly email: string;
-  readonly message: string;
-}
-
-/** Validator patterns — frozen to prevent prototype pollution. */
-interface ValidatorPatterns {
-  readonly email: RegExp;
-  readonly phone: RegExp;
-  readonly name: RegExp;
-  readonly message: RegExp;
-}
-
-/* ================================================
-   2. SECURITY UTILITIES
-   ================================================ */
-
-/**
- * Sanitise user-provided strings to prevent XSS.
- * Creates a text node (auto-escapes HTML entities) and reads innerHTML.
- */
-function sanitise(str: string): string {
-  const div: HTMLDivElement = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
-
-/** Input validation patterns — frozen to prevent tampering. */
-const VALIDATORS: ValidatorPatterns = Object.freeze({
-  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-  phone: /^[\d\s\-+()]{7,20}$/,
-  name: /^[a-zA-Z\s\-']{2,80}$/,
-  message: /^.{10,2000}$/s,
-});
-
-/** Rate limiter to prevent form submission spam. */
-const RateLimiter = (() => {
-  let lastSubmission: number = 0;
-  const MIN_INTERVAL_MS: number = 3000; // 3 seconds between submissions
-
-  return {
-    canSubmit(): boolean {
-      const now: number = Date.now();
-      if (now - lastSubmission < MIN_INTERVAL_MS) {
-        return false;
-      }
-      lastSubmission = now;
-      return true;
-    },
-  };
-})();
-
-/* ================================================
-   3. SCROLL-TRIGGERED ANIMATIONS (IntersectionObserver)
-   ================================================ */
-
-function initScrollAnimations(): void {
-  const elements: NodeListOf<Element> = document.querySelectorAll('.animate-on-scroll');
-  if (!elements.length) return;
-
-  const observer: IntersectionObserver = new IntersectionObserver(
-    (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry: IntersectionObserverEntry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-  );
-
-  elements.forEach((el: Element) => observer.observe(el));
-}
-
-/* ================================================
-   4. NAVIGATION
+   1. NAVIGATION
    ================================================ */
 
 function initNav(): void {
@@ -108,7 +18,7 @@ function initNav(): void {
 
   if (!nav || !toggle || !links) return;
 
-  /* Scroll shadow */
+  /* Scrolled state — denser glass pill */
   window.addEventListener(
     'scroll',
     () => {
@@ -117,281 +27,229 @@ function initNav(): void {
     { passive: true }
   );
 
-  /* Mobile hamburger toggle */
+  const closeMenu = (): void => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+    document.body.style.overflow = '';
+  };
+
+  /* Full-screen mobile menu */
   toggle.addEventListener('click', () => {
-    const isOpen: boolean = links.classList.toggle('active');
-    toggle.classList.toggle('active');
+    const isOpen: boolean = links.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
     document.body.style.overflow = isOpen ? 'hidden' : '';
   });
 
-  /* Close mobile menu on link click */
-  links.querySelectorAll('.nav__link').forEach((link: Element) => {
-    link.addEventListener('click', () => {
-      links.classList.remove('active');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
-    });
+  links.querySelectorAll('a').forEach((link: Element) => {
+    link.addEventListener('click', closeMenu);
   });
 
-  /* Close on outside click */
-  document.addEventListener('click', (e: MouseEvent) => {
-    if (!nav.contains(e.target as Node) && links.classList.contains('active')) {
-      links.classList.remove('active');
-      toggle.classList.remove('active');
-      toggle.setAttribute('aria-expanded', 'false');
-      document.body.style.overflow = '';
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape' && links.classList.contains('open')) {
+      closeMenu();
+      (toggle as HTMLButtonElement).focus();
     }
   });
 }
 
 /* ================================================
-   5. STAT COUNTER ANIMATION
+   2. SCROLL REVEALS (IntersectionObserver)
    ================================================ */
 
-function initStatCounters(): void {
-  const stats: NodeListOf<HTMLElement> = document.querySelectorAll('.stat__value[data-count]');
-  if (!stats.length) return;
+function initReveals(): void {
+  const elements: NodeListOf<Element> = document.querySelectorAll('.reveal');
+  if (!elements.length) return;
+
+  if (!('IntersectionObserver' in window)) {
+    elements.forEach((el: Element) => el.classList.add('in'));
+    return;
+  }
 
   const observer: IntersectionObserver = new IntersectionObserver(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry: IntersectionObserverEntry) => {
         if (entry.isIntersecting) {
-          animateCounter(entry.target as HTMLElement);
+          entry.target.classList.add('in');
           observer.unobserve(entry.target);
         }
       });
     },
-    { threshold: 0.5 }
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  elements.forEach((el: Element) => observer.observe(el));
+}
+
+/* ================================================
+   3. STAT COUNTERS
+   ================================================ */
+
+function initStatCounters(): void {
+  const stats: NodeListOf<HTMLElement> = document.querySelectorAll('.stat__num[data-count]');
+  if (!stats.length) return;
+
+  const reduceMotion: boolean = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const render = (el: HTMLElement, value: number): void => {
+    el.textContent = value.toLocaleString() + (el.dataset.suffix ?? '');
+  };
+
+  const animate = (el: HTMLElement): void => {
+    const target: number = parseInt(el.dataset.count ?? '0', 10);
+    if (reduceMotion) {
+      render(el, target);
+      return;
+    }
+
+    const duration: number = 1800;
+    const start: number = performance.now();
+
+    const tick = (now: number): void => {
+      const progress: number = Math.min((now - start) / duration, 1);
+      const eased: number = 1 - Math.pow(1 - progress, 3);
+      render(el, Math.round(eased * target));
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  const observer: IntersectionObserver = new IntersectionObserver(
+    (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry: IntersectionObserverEntry) => {
+        if (entry.isIntersecting) {
+          animate(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
   );
 
   stats.forEach((stat: HTMLElement) => observer.observe(stat));
 }
 
-/**
- * Animate a single counter from 0 to its data-count value.
- * Uses ease-out cubic for a natural deceleration feel.
- */
-function animateCounter(el: HTMLElement): void {
-  const target: number = parseInt(el.dataset.count ?? '0', 10);
-  const suffix: string = el.dataset.suffix ?? '';
-  const originalText: string = el.textContent ?? '';
-  const textSuffix: string = originalText.replace(/[\d,]+/, '').replace(suffix, '');
-  const duration: number = 2000;
-  const startTime: number = performance.now();
-
-  function update(currentTime: number): void {
-    const elapsed: number = currentTime - startTime;
-    const progress: number = Math.min(elapsed / duration, 1);
-    const eased: number = 1 - Math.pow(1 - progress, 3);
-    const current: number = Math.round(eased * target);
-
-    el.textContent = current.toLocaleString() + suffix + textSuffix;
-
-    if (progress < 1) {
-      requestAnimationFrame(update);
-    }
-  }
-
-  requestAnimationFrame(update);
-}
-
 /* ================================================
-   6. SERVICE TABS (services.html)
+   4. SERVICE TABS (services.html) — ARIA tablist
    ================================================ */
 
 function initServiceTabs(): void {
-  const tabs: NodeListOf<HTMLElement> = document.querySelectorAll('.service-tab');
-  const panels: NodeListOf<HTMLElement> = document.querySelectorAll('.service-detail');
+  const tablist: HTMLElement | null = document.querySelector('[role="tablist"]');
+  if (!tablist) return;
 
+  const tabs: HTMLElement[] = Array.from(tablist.querySelectorAll<HTMLElement>('[role="tab"]'));
+  const panels: HTMLElement[] = Array.from(document.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
   if (!tabs.length || !panels.length) return;
 
+  const select = (tab: HTMLElement, focus: boolean = true): void => {
+    tabs.forEach((t: HTMLElement) => {
+      const active: boolean = t === tab;
+      t.setAttribute('aria-selected', String(active));
+      t.tabIndex = active ? 0 : -1;
+    });
+
+    panels.forEach((panel: HTMLElement) => {
+      panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+      if (!panel.hidden) {
+        /* Re-run reveal animations inside the freshly shown panel */
+        panel.querySelectorAll('.reveal').forEach((el: Element) => el.classList.add('in'));
+      }
+    });
+
+    if (focus) tab.focus();
+  };
+
   tabs.forEach((tab: HTMLElement) => {
-    tab.addEventListener('click', () => {
-      const targetId: string | undefined = tab.dataset.tab;
+    tab.addEventListener('click', () => select(tab, false));
 
-      /* Update active tab */
-      tabs.forEach((t: HTMLElement) => t.classList.remove('service-tab--active'));
-      tab.classList.add('service-tab--active');
+    tab.addEventListener('keydown', (e: KeyboardEvent) => {
+      const i: number = tabs.indexOf(tab);
+      let next: number | null = null;
 
-      /* Show target panel */
-      panels.forEach((panel: HTMLElement) => {
-        panel.classList.remove('active');
-        if (panel.id === targetId) {
-          panel.classList.add('active');
-          /* Re-trigger animations for newly visible content */
-          panel.querySelectorAll('.animate-on-scroll').forEach((el: Element) => {
-            el.classList.remove('visible');
-            void (el as HTMLElement).offsetWidth; // force reflow
-            el.classList.add('visible');
-          });
-        }
-      });
-    });
-  });
+      if (e.key === 'ArrowRight') next = (i + 1) % tabs.length;
+      else if (e.key === 'ArrowLeft') next = (i - 1 + tabs.length) % tabs.length;
+      else if (e.key === 'Home') next = 0;
+      else if (e.key === 'End') next = tabs.length - 1;
 
-  /* Handle hash-based deep linking (e.g. services.html#repairs) */
-  const hash: string = window.location.hash.replace('#', '');
-  if (hash) {
-    const sanitisedHash: string = sanitise(hash);
-    const targetTab: HTMLElement | null = document.querySelector(
-      `.service-tab[data-tab="${sanitisedHash}"]`
-    );
-    if (targetTab) {
-      targetTab.click();
-      /* Scroll to services content area after a brief delay */
-      setTimeout(() => {
-        const contentSection: HTMLElement | null = document.getElementById('services-content');
-        if (contentSection) {
-          contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      }, 300);
-    }
-  }
-}
-
-/* ================================================
-   7. SMOOTH SCROLL FOR ANCHOR LINKS
-   ================================================ */
-
-function initSmoothScroll(): void {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
-    anchor.addEventListener('click', (e: Event) => {
-      const targetId: string | null = anchor.getAttribute('href');
-      if (!targetId || targetId === '#') return;
-
-      const target: HTMLElement | null = document.querySelector(targetId);
-      if (target) {
+      if (next !== null) {
         e.preventDefault();
-        const navHeight: number = document.getElementById('mainNav')?.offsetHeight ?? 72;
-        const top: number = target.getBoundingClientRect().top + window.scrollY - navHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
+        const target: HTMLElement | undefined = tabs[next];
+        if (target) select(target);
       }
     });
   });
+
+  /* Deep links: services.html#repairs activates the matching tab */
+  const applyHash = (): void => {
+    const hash: string = window.location.hash.replace('#', '');
+    if (!hash) return;
+    const tab: HTMLElement | null = document.getElementById(`tab-${CSS.escape(hash)}`);
+    if (tab) {
+      select(tab, false);
+      const content: HTMLElement | null = document.getElementById('services-content');
+      content?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  applyHash();
+  window.addEventListener('hashchange', applyHash);
 }
 
 /* ================================================
-   8. CONTACT FORM VALIDATION (if present)
+   5. BEFORE / AFTER SLIDER
    ================================================ */
 
-function initContactForm(): void {
-  const form: HTMLFormElement | null = document.getElementById('contactForm') as HTMLFormElement | null;
-  if (!form) return;
+function initBeforeAfter(): void {
+  const container: HTMLElement | null = document.getElementById('beforeAfter');
+  if (!container) return;
 
-  form.addEventListener('submit', (e: SubmitEvent) => {
-    e.preventDefault();
+  const range: HTMLInputElement | null = container.querySelector('.ba__range');
+  if (!range) return;
 
-    /* Rate-limit submissions */
-    if (!RateLimiter.canSubmit()) {
-      return;
-    }
+  const update = (): void => {
+    container.style.setProperty('--pos', `${range.value}%`);
+  };
 
-    /* Check honeypot — if filled, it's a bot */
-    const honeypot: HTMLInputElement | null = form.querySelector('.ohnohoney input');
-    if (honeypot && honeypot.value) {
-      return; // silently ignore bot submission
-    }
-
-    let isValid: boolean = true;
-
-    /* Validate each field */
-    const fields: readonly FormFieldConfig[] = [
-      { id: 'name', validator: VALIDATORS.name, msg: 'Please enter a valid name (2–80 chars).' },
-      { id: 'email', validator: VALIDATORS.email, msg: 'Please enter a valid email address.' },
-      { id: 'message', validator: VALIDATORS.message, msg: 'Message must be 10–2000 characters.' },
-    ] as const;
-
-    fields.forEach(({ id, validator, msg }: FormFieldConfig) => {
-      const input: HTMLInputElement | null = form.querySelector(`#${id}`);
-      const error: HTMLElement | null = form.querySelector(`#${id}-error`);
-      if (!input || !error) return;
-
-      const value: string = input.value.trim();
-      if (!validator.test(value)) {
-        error.textContent = msg;
-        error.style.display = 'block';
-        input.style.borderColor = '#ef4444';
-        isValid = false;
-      } else {
-        error.style.display = 'none';
-        input.style.borderColor = '';
-      }
-    });
-
-    if (isValid) {
-      /* Sanitise values before any processing — never trust user input */
-      const nameInput: HTMLInputElement | null = form.querySelector('#name');
-      const emailInput: HTMLInputElement | null = form.querySelector('#email');
-      const messageInput: HTMLTextAreaElement | null = form.querySelector('#message');
-
-      if (!nameInput || !emailInput || !messageInput) return;
-
-      const formData: SanitisedFormData = {
-        name: sanitise(nameInput.value.trim()),
-        email: sanitise(emailInput.value.trim()),
-        message: sanitise(messageInput.value.trim()),
-      };
-
-      // In production, POST formData to a secure backend via HTTPS.
-      // No console.log — never expose user data to devtools.
-      void formData;
-
-      /* Show success state */
-      const submitBtn: HTMLButtonElement | null = form.querySelector('button[type="submit"]');
-      if (submitBtn) {
-        submitBtn.textContent = 'Message Sent ✓';
-        submitBtn.disabled = true;
-        submitBtn.style.opacity = '0.7';
-      }
-
-      form.reset();
-    }
-  });
+  range.addEventListener('input', update);
+  update();
 }
 
 /* ================================================
-   9. SVG GSAP ANIMATION
+   6. GALLERY SCROLL CONTROLS
    ================================================ */
 
-function initSvgAnimation(): void {
-  const redcircle = document.getElementById("redcircle");
-  if (redcircle && typeof gsap !== 'undefined') {
-    gsap.to(redcircle, {
-      duration: 4,
-      x: "-50px",
-      y: "-40px",
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.2,
-      ease: "sine.inOut"
-    });
-  }
+function initGallery(): void {
+  const track: HTMLElement | null = document.getElementById('galleryTrack');
+  const prev: HTMLElement | null = document.getElementById('galleryPrev');
+  const next: HTMLElement | null = document.getElementById('galleryNext');
+  if (!track || !prev || !next) return;
 
-  const bluecircle = document.getElementById("bluecircle");
-  if (bluecircle && typeof gsap !== 'undefined') {
-    gsap.to(bluecircle, {
-      duration: 5,
-      x: "30px",
-      y: "20px",
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0.5,
-      ease: "sine.inOut"
-    });
-  }
+  const step = (): number => {
+    const card: HTMLElement | null = track.querySelector('.gallery__card');
+    return card ? card.offsetWidth + 24 : 360;
+  };
+
+  prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+  next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
 }
 
 /* ================================================
-   10. PRIVACY GUARD
+   7. FOOTER YEAR
    ================================================ */
 
-/**
- * Blocks common privacy leakage vectors at runtime.
- */
+function initYear(): void {
+  const el: HTMLElement | null = document.getElementById('year');
+  if (el) el.textContent = String(new Date().getFullYear());
+}
+
+/* ================================================
+   8. PRIVACY GUARD
+   ================================================ */
+
+/** Blocks common privacy-leakage vectors at runtime. */
 function initPrivacyGuard(): void {
-  /* Disable Beacon API to prevent data exfiltration */
   if ('sendBeacon' in navigator) {
     Object.defineProperty(navigator, 'sendBeacon', {
       value: () => false,
@@ -400,7 +258,6 @@ function initPrivacyGuard(): void {
     });
   }
 
-  /* Prevent WebRTC IP leakage by overriding RTCPeerConnection */
   if ('RTCPeerConnection' in window) {
     (window as unknown as Record<string, unknown>).RTCPeerConnection = undefined;
   }
@@ -408,7 +265,6 @@ function initPrivacyGuard(): void {
     (window as unknown as Record<string, unknown>).webkitRTCPeerConnection = undefined;
   }
 
-  /* Block Battery API if exposed */
   if ('getBattery' in navigator) {
     Object.defineProperty(navigator, 'getBattery', {
       value: () => Promise.reject(new Error('Blocked for privacy')),
@@ -419,16 +275,16 @@ function initPrivacyGuard(): void {
 }
 
 /* ================================================
-   11. INITIALISE EVERYTHING ON DOM READY
+   INITIALISE ON DOM READY
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', (): void => {
   initPrivacyGuard();
   initNav();
-  initScrollAnimations();
+  initReveals();
   initStatCounters();
   initServiceTabs();
-  initSmoothScroll();
-  initContactForm();
-  initSvgAnimation();
+  initBeforeAfter();
+  initGallery();
+  initYear();
 });
