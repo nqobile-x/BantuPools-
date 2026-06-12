@@ -4,356 +4,607 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
-  <meta http-equiv="X-Frame-Options" content="DENY">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="format-detection" content="telephone=no">
   <!-- CSP: strict resource policy -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self';">
-  <!-- Permissions-Policy: disable unused browser APIs -->
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=()">
 
-  <title>Bantu Pools — Professional Pool Services</title>
-  <meta name="description" content="Bantu Pools offers premier pool construction, cleaning, maintenance, and repair services in South Africa. Crystal clear results guaranteed with 15+ years experience.">
-  <meta name="keywords" content="swimming pools, pool construction, pool maintenance, pool cleaning, pool repair, Bantu Pools, South Africa pool services, pool renovations">
+  <title>Bantu Pools — Pool Cleaning, Repairs &amp; Renovations in Johannesburg</title>
+  <meta name="description" content="Bantu Pools brings pools back to life — expert cleaning, equipment repairs and full renovations in Johannesburg & surrounds. 15+ years experience. Get a free WhatsApp quote today.">
   <meta name="author" content="Bantu Pools">
+  <meta name="theme-color" content="#101b29">
+  <link rel="canonical" href="https://www.bantupools.co.za/">
 
-  <!-- Open Graph / Social Media Tags -->
-  <meta property="og:title" content="Bantu Pools | Professional Pool Services">
-  <meta property="og:description" content="Discover premier pool construction, maintenance, and repair services with Bantu Pools.">
+  <!-- Icons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Bantu Pools | Pool Cleaning, Repairs & Renovations">
+  <meta property="og:description" content="We bring pools back to life. Expert cleaning, repairs and renovations in Johannesburg & surrounds — crystal-clear results, guaranteed.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.bantupools.co.za/">
-  <meta property="og:image" content="https://www.bantupools.co.za/assets/logo/bantu-pools-logo.png">
+  <meta property="og:image" content="https://www.bantupools.co.za/assets/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
-  <!-- JSON-LD Structured Data for AI & Search Engines -->
+  <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
     "name": "Bantu Pools",
-    "image": "https://www.bantupools.co.za/assets/logo/bantu-pools-logo.png",
+    "image": "https://www.bantupools.co.za/assets/img/og-image.jpg",
+    "logo": "https://www.bantupools.co.za/assets/logo/logo-nav.png",
     "telephone": "+27836883238",
     "url": "https://www.bantupools.co.za/",
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "Johannesburg",
       "addressCountry": "ZA"
     },
     "serviceArea": {
       "@type": "Place",
-      "name": "South Africa"
+      "name": "Johannesburg & surrounds, South Africa"
     },
     "sameAs": [
       "https://wa.me/27836883238"
     ],
-    "description": "Bantu Pools provides expert swimming pool construction, regular maintenance, and reliable repair services."
+    "description": "Bantu Pools provides expert swimming pool cleaning, equipment repairs and full renovations across Johannesburg and surrounds."
   }
   </script>
 
-  <!-- Google Fonts — Manrope + Material Symbols -->
+  <!-- Fonts: Bricolage Grotesque (display) + Manrope (body) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+
+  <!-- Preload hero image -->
+  <link rel="preload" as="image" imagesrcset="assets/img/pool-after-800.webp 800w, assets/img/pool-after-1280.webp 1280w, assets/img/pool-after-1920.webp 1920w" imagesizes="100vw">
 
   <link rel="stylesheet" href="styles.css">
-  <script src="vendor/gsap.min.js"></script>
   <script src="main.js" defer></script>
 </head>
 <body>
 
+  <!-- ===== SVG ICON SPRITE ===== -->
+  <svg hidden aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-arrow-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-droplet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></symbol>
+      <symbol id="i-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 2 10 5-10 5L2 7Z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+      <symbol id="i-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.94 15.5a2 2 0 0 0-1.44-1.44l-6.13-1.58a.5.5 0 0 1 0-.96L8.5 9.94a2 2 0 0 0 1.44-1.44l1.58-6.13a.5.5 0 0 1 .96 0l1.58 6.13a2 2 0 0 0 1.44 1.44l6.13 1.58a.5.5 0 0 1 0 .96l-6.13 1.58a2 2 0 0 0-1.44 1.44l-1.58 6.13a.5.5 0 0 1-.96 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+      <symbol id="i-map-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-camera" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></symbol>
+      <symbol id="i-whatsapp" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
   <!-- ===== NAVIGATION ===== -->
-  <nav class="nav" id="mainNav">
-    <div class="container nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Bantu Pools Home">
-        <img src="assets/logo/bantu-pools-logo.png" alt="Bantu Pools Logo" height="50" class="nav__logo-img">
-      </a>
-
-      <div class="nav__links" id="navLinks">
-        <a href="index.html" class="nav__link nav__link--active">Home</a>
-        <a href="services.html" class="nav__link">Services</a>
-        <a href="#projects" class="nav__link">Gallery</a>
-        <a href="#contact" class="nav__link">Contact</a>
-        <a href="services.html" class="btn btn--primary nav__cta">Get a Quote</a>
-      </div>
-
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ===== HERO SECTION ===== -->
-  <section class="hero" id="home">
-    <div class="hero__bg">
-      <img src="assets/bantu-pools.png" alt="Luxury swimming pool with crystal clear water" width="1920" height="1080" loading="eager">
-      <div class="hero__overlay"></div>
-    </div>
-
-    <div class="container hero__content">
-      <div class="hero__badge animate-on-scroll">
-        <span class="hero__badge-dot"></span>
-        Licensed &amp; Insured Professionals
-      </div>
-      <h1 class="hero__title animate-on-scroll delay-1">
-        Experience the Luxury of a <span>Pristine Pool</span>
-      </h1>
-      <p class="hero__desc animate-on-scroll delay-2">
-        We offer tailored solutions to keep your pool sparkling clean, fully functional, and beautifully modern. From weekly maintenance to complete renovations.
-      </p>
-      <div class="hero__actions animate-on-scroll delay-3">
-        <a href="services.html" class="btn btn--primary btn--lg">
-          Explore Services
-          <span class="material-symbols-outlined">arrow_forward</span>
-        </a>
-        <a href="https://wa.me/27836883238" class="btn btn--outline-light btn--lg" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined">chat</span>
-          WhatsApp Us
-        </a>
-      </div>
-    </div>
-
-    <div class="hero__decoration"></div>
-  </section>
-
-  <!-- ===== SERVICES OVERVIEW ===== -->
-  <section class="section" id="services">
+  <header class="nav" id="mainNav">
     <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow animate-on-scroll">What We Do</p>
-        <h2 class="section-title animate-on-scroll delay-1">Comprehensive Pool Care</h2>
-        <p class="section-subtitle animate-on-scroll delay-2">
-          From sparkling clean water to full equipment overhauls, we've got everything covered.
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo" aria-label="Bantu Pools — home">
+          <img src="assets/logo/logo-nav.png" alt="" width="49" height="42">
+          Bantu&nbsp;Pools
+        </a>
+
+        <nav class="nav__links" id="navLinks" aria-label="Main navigation">
+          <a href="index.html" class="nav__link nav__link--active" aria-current="page">Home</a>
+          <a href="services.html" class="nav__link">Services</a>
+          <a href="#results" class="nav__link">Results</a>
+          <a href="#projects" class="nav__link">Projects</a>
+          <a href="#contact" class="nav__link">Contact</a>
+          <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20please" class="btn btn--primary nav__cta" target="_blank" rel="noopener noreferrer">
+            Get a free quote
+          </a>
+        </nav>
+
+        <button class="nav__toggle" id="navToggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+      <div class="hero__bg">
+        <img
+          src="assets/img/pool-after-1280.webp"
+          srcset="assets/img/pool-after-800.webp 800w, assets/img/pool-after-1280.webp 1280w, assets/img/pool-after-1920.webp 1920w"
+          sizes="100vw"
+          alt="Sparkling clean swimming pool restored by Bantu Pools, with mountains in the background"
+          width="1920" height="1072"
+          fetchpriority="high" decoding="async">
+      </div>
+
+      <div class="container hero__content">
+        <p class="hero__badge reveal">
+          <span class="hero__badge-dot"></span>
+          Licensed &amp; insured · Johannesburg &amp; surrounds
+        </p>
+        <h1 class="hero__title reveal d1">
+          We bring pools <span class="tint">back to life.</span>
+        </h1>
+        <p class="hero__desc reveal d2">
+          Cleaning, repairs and full renovations by a team that treats your pool like its own.
+          Crystal-clear water, healthy chemistry, zero hassle — all year round.
+        </p>
+        <div class="hero__actions reveal d3">
+          <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20please" class="btn btn--whatsapp btn--lg" target="_blank" rel="noopener noreferrer">
+            <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+            Get a free quote
+          </a>
+          <a href="services.html" class="btn btn--ghost btn--lg">
+            Explore services
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="container">
+        <dl class="hero__stats reveal d4">
+          <div class="stat">
+            <dt class="stat__label sr-only">Pools serviced</dt>
+            <dd class="stat__num" data-count="500" data-suffix="+">0+</dd>
+            <dd class="stat__label" aria-hidden="true">Pools serviced</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__label sr-only">Years of experience</dt>
+            <dd class="stat__num" data-count="15" data-suffix="+">0+</dd>
+            <dd class="stat__label" aria-hidden="true">Years experience</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__label sr-only">Satisfaction rate</dt>
+            <dd class="stat__num" data-count="100" data-suffix="%">0%</dd>
+            <dd class="stat__label" aria-hidden="true">Satisfaction rate</dd>
+          </div>
+          <div class="stat">
+            <dt class="stat__label sr-only">Emergency support</dt>
+            <dd class="stat__num" data-count="24" data-suffix="/7">0/7</dd>
+            <dd class="stat__label" aria-hidden="true">Emergency support</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span class="marquee__item">Pool cleaning</span>
+        <span class="marquee__item">Equipment repairs</span>
+        <span class="marquee__item">Renovations</span>
+        <span class="marquee__item">Green-to-clean rescues</span>
+        <span class="marquee__item">Chemical balancing</span>
+        <span class="marquee__item">Leak detection</span>
+        <span class="marquee__item">Resurfacing</span>
+        <span class="marquee__item">Pool cleaning</span>
+        <span class="marquee__item">Equipment repairs</span>
+        <span class="marquee__item">Renovations</span>
+        <span class="marquee__item">Green-to-clean rescues</span>
+        <span class="marquee__item">Chemical balancing</span>
+        <span class="marquee__item">Leak detection</span>
+        <span class="marquee__item">Resurfacing</span>
+      </div>
+    </div>
+
+    <!-- ===== SERVICES BENTO ===== -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">What we do</p>
+          <h2 class="section-title reveal d1">Every pool, covered.</h2>
+          <p class="section-sub reveal d2">
+            One team for the whole lifecycle of your pool — weekly care, urgent fixes and complete transformations.
+          </p>
+        </div>
+
+        <div class="bento">
+          <!-- Cleaning — large feature card -->
+          <article class="bento__card bento__card--lg reveal">
+            <div class="bento__body">
+              <div class="bento__icon">
+                <svg class="icon" aria-hidden="true"><use href="#i-droplet"/></svg>
+              </div>
+              <h3 class="bento__title">Pool Cleaning &amp; Maintenance</h3>
+              <p class="bento__desc">
+                Weekly visits that keep your water swim-ready: skimming, vacuuming, filter care and precise
+                chemical balancing. We even rescue the greenest of pools.
+              </p>
+              <a href="services.html#cleaning" class="link-arrow">
+                Learn more
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </a>
+            </div>
+            <div class="bento__media">
+              <img src="assets/img/cleaning-960.webp" srcset="assets/img/cleaning-640.webp 640w, assets/img/cleaning-960.webp 960w" sizes="(max-width: 820px) 100vw, 55vw" alt="Bantu Pools technician scrubbing the waterline tiles of a pool" width="960" height="536" loading="lazy" decoding="async">
+            </div>
+          </article>
+
+          <!-- Repairs -->
+          <article class="bento__card bento__card--md reveal d1">
+            <div class="bento__media">
+              <img src="assets/img/repairs-960.webp" srcset="assets/img/repairs-640.webp 640w, assets/img/repairs-960.webp 960w" sizes="(max-width: 820px) 100vw, 40vw" alt="Bantu Pools team servicing pool pump equipment" width="960" height="536" loading="lazy" decoding="async">
+            </div>
+            <div class="bento__body">
+              <div class="bento__icon">
+                <svg class="icon" aria-hidden="true"><use href="#i-wrench"/></svg>
+              </div>
+              <h3 class="bento__title">Equipment Repairs</h3>
+              <p class="bento__desc">
+                Pumps, filters, heaters and leaks — diagnosed fast and fixed properly, before small faults become big bills.
+              </p>
+              <a href="services.html#repairs" class="link-arrow">
+                Learn more
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- Renovations -->
+          <article class="bento__card bento__card--md reveal d2">
+            <div class="bento__media">
+              <img src="assets/img/construction-960.webp" srcset="assets/img/construction-640.webp 640w, assets/img/construction-960.webp 960w" sizes="(max-width: 820px) 100vw, 40vw" alt="Pool shell being resurfaced during a renovation" width="960" height="536" loading="lazy" decoding="async">
+            </div>
+            <div class="bento__body">
+              <div class="bento__icon">
+                <svg class="icon" aria-hidden="true"><use href="#i-layers"/></svg>
+              </div>
+              <h3 class="bento__title">Renovations &amp; Resurfacing</h3>
+              <p class="bento__desc">
+                Tired pool? We re-marble, retile and relight — turning dated pools into the best feature of your home.
+              </p>
+              <a href="services.html#renovations" class="link-arrow">
+                Learn more
+                <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- WhatsApp quote tile -->
+          <article class="bento__card bento__card--md bento__card--cta reveal d3">
+            <div class="bento__body">
+              <div class="bento__icon">
+                <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg>
+              </div>
+              <h3 class="bento__title">Not sure what your pool needs?</h3>
+              <p class="bento__desc">
+                WhatsApp us a photo of your pool and we'll tell you exactly what it needs — with a free, no-obligation quote.
+              </p>
+              <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20here%27s%20a%20photo%20of%20my%20pool" class="btn btn--whatsapp" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                Send a photo
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BEFORE / AFTER ===== -->
+    <section class="section section--dark ba-section" id="results">
+      <div class="container">
+        <div class="section-head section-head--center">
+          <p class="eyebrow reveal">The proof</p>
+          <h2 class="section-title reveal d1">Drag to see the difference.</h2>
+          <p class="section-sub reveal d2">
+            A real Bantu Pools green-to-clean rescue — same pool, same angle. Just add our team.
+          </p>
+        </div>
+
+        <div class="ba reveal" id="beforeAfter">
+          <img src="assets/img/pool-before-1280.webp" srcset="assets/img/pool-before-800.webp 800w, assets/img/pool-before-1280.webp 1280w" sizes="(max-width: 1240px) 100vw, 1160px" alt="Neglected pool with green algae-filled water, before treatment" width="1280" height="714" loading="lazy" decoding="async">
+          <img class="ba__after" src="assets/img/pool-after-1280.webp" srcset="assets/img/pool-after-800.webp 800w, assets/img/pool-after-1280.webp 1280w" sizes="(max-width: 1240px) 100vw, 1160px" alt="The same pool with crystal-clear blue water, after Bantu Pools treatment" width="1280" height="714" loading="lazy" decoding="async">
+
+          <div class="ba__divider" aria-hidden="true">
+            <div class="ba__handle">
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+            </div>
+          </div>
+
+          <span class="ba__chip ba__chip--after">After</span>
+          <span class="ba__chip ba__chip--before">Before</span>
+
+          <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after: slide to reveal the cleaned pool">
+        </div>
+
+        <p class="ba__hint reveal d1">
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+          Drag the handle
+          <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
         </p>
       </div>
+    </section>
 
-      <div class="services-grid">
-        <!-- Cleaning -->
-        <div class="service-card animate-on-scroll">
-          <div class="service-card__icon">
-            <span class="material-symbols-outlined">cleaning_services</span>
-          </div>
-          <h3 class="service-card__title">Pool Cleaning</h3>
-          <p class="service-card__desc">
-            Weekly maintenance to keep your water crystal clear and healthy. We handle skimming, vacuuming, and chemical balancing.
-          </p>
-          <a href="services.html#cleaning" class="service-card__link">
-            Learn More
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
+    <!-- ===== PROCESS ===== -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">How it works</p>
+          <h2 class="section-title reveal d1">Sparkling water in three steps.</h2>
         </div>
 
-        <!-- Repairs -->
-        <div class="service-card animate-on-scroll delay-1">
-          <div class="service-card__icon">
-            <span class="material-symbols-outlined">build</span>
-          </div>
-          <h3 class="service-card__title">Pool Repairs</h3>
-          <p class="service-card__desc">
-            Fast, reliable fixes for pumps, heaters, filters, and more. Don't let a broken part ruin your swim season.
-          </p>
-          <a href="services.html#repairs" class="service-card__link">
-            Learn More
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-        </div>
-
-        <!-- Renovations -->
-        <div class="service-card animate-on-scroll delay-2">
-          <div class="service-card__icon">
-            <span class="material-symbols-outlined">grid_view</span>
-          </div>
-          <h3 class="service-card__title">Renovations</h3>
-          <p class="service-card__desc">
-            Transform your dated pool into a modern masterpiece. Resurfacing, tiling, and new features to upgrade your lifestyle.
-          </p>
-          <a href="services.html#renovations" class="service-card__link">
-            Learn More
-            <span class="material-symbols-outlined">arrow_forward</span>
-          </a>
-        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <p class="step__num" aria-hidden="true">01</p>
+            <h3 class="step__title">
+              <svg class="icon" aria-hidden="true"><use href="#i-camera"/></svg>
+              Send us a photo
+            </h3>
+            <p class="step__desc">
+              WhatsApp a photo of your pool — green, broken or just tired. No site visit needed to get started.
+            </p>
+          </li>
+          <li class="step reveal d1">
+            <p class="step__num" aria-hidden="true">02</p>
+            <h3 class="step__title">
+              <svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>
+              Get a same-day quote
+            </h3>
+            <p class="step__desc">
+              We assess, quote and schedule fast — usually within hours. Clear pricing, no surprises.
+            </p>
+          </li>
+          <li class="step reveal d2">
+            <p class="step__num" aria-hidden="true">03</p>
+            <h3 class="step__title">
+              <svg class="icon" aria-hidden="true"><use href="#i-sparkles"/></svg>
+              We make it sparkle
+            </h3>
+            <p class="step__desc">
+              Our team does the work and keeps it that way with optional weekly care. You just swim.
+            </p>
+          </li>
+        </ol>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== STATS BAR ===== -->
-  <section class="stats">
-    
-    <!-- Animated Pool Background -->
-    <div class="stats__svg-bg" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 297" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
-        <g id="layer1">
-          <path opacity="1" fill="#b7c4c8" stroke-width="0.99999994" d="M 176.03711 337.35742 C 175.46691 337.34943 174.89817 337.3497 174.33203 337.35938 C 167.28676 337.47982 160.60603 338.97041 155.56836 341.87891 L -129.64062 506.54492 L -148.25 498.26953 L -182.09961 503.47461 L -182.09961 543.64258 L -182.0918 543.64453 C -182.01303 548.67183 -178.22913 553.95165 -170.91211 558.08594 L 429.49805 897.33203 C 442.93752 904.92563 463.02631 905.68706 474.54102 899.03906 L 803.13867 709.32422 L 803.14062 709.32422 L 803.14258 709.32227 L 804.49805 708.53906 C 810.05972 705.32803 812.56386 700.99333 812.16211 696.51367 L 812.16992 696.50391 L 812.11719 657.59766 L 789.57812 637.45703 L 754.25781 656.4082 L 200.61328 343.58594 C 193.52606 339.5815 184.59017 337.47727 176.03711 337.35742 z " transform="scale(0.26458333)" />
-          <path opacity="1" fill="#e6e6e6" stroke-width="0.26458332" d="M -46.154431,130.55605 41.146341,80.152931 c 3.04659,-1.75895 8.361923,-1.557532 11.917781,0.451614 L 211.92267,170.36314 c 3.55583,2.00917 3.96584,5.04267 0.91925,6.80162 l -87.30076,50.40312 c -3.0466,1.75895 -8.36193,1.55753 -11.91779,-0.45161 l -158.858537,-89.7586 c -3.555866,-2.00915 -3.965855,-5.04267 -0.919264,-6.80162 z" />
-          <path opacity="1" fill="#afdde9" stroke-width="0.29015836" d="m -31.368704,139.43383 88.217296,-50.93228 131.579818,74.34552 -88.2173,50.93228 z" />
-          <path opacity="1" fill="#00bdec" stroke-width="0.26458332" d="M -21.742614,140.29202 58.454941,93.989936 178.80232,161.98888 98.604762,208.29096 Z" />
-          <path fill="#0988a9" stroke="none" stroke-width="0.99999994px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" d="M 220.93164 355.23828 L -79.246094 528.54492 L -79.246094 531.89453 L -53.044922 546.69922 L 220.93164 388.51953 L 220.93164 355.23828 z " transform="scale(0.26458333)" />
-          <path fill="#0ba9d1" stroke="none" stroke-width="0.99999994px" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" d="M 220.93164 355.23828 L 220.93164 388.51953 L 646.15039 629.35352 L 675.78906 612.24219 L 220.93164 355.23828 z " transform="scale(0.26458333)" />
-          <path opacity="0.801" fill="#6de2ff" stroke-width="0.17302117" d="m 19.905002,163.82385 52.44425,-30.27871 78.699758,44.46712 -52.444248,30.2787 z" />
-          <path opacity="0.94899998" fill="#fff1f3" stroke="none" stroke-width="0.14481041" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" d="m 94.160624,152.60379 c -8.036789,0 -14.552881,6.5175 -14.552881,14.55429 0,7.83896 6.199626,14.2299 13.962609,14.53987 0.0024,0 0.0046,0.002 0.007,0.002 v -0.002 c 0.193585,0.007 0.387746,0.0127 0.583201,0.0127 8.036787,0 14.554017,-6.51608 14.554017,-14.55287 0,-7.84138 -6.2044,-14.23524 -13.970815,-14.54157 v -8.1e-4 c -0.0019,-7e-5 -0.0037,5.8e-4 -0.0057,5.8e-4 -0.191668,-0.007 -0.384046,-0.0125 -0.577545,-0.0125 z" id="bluecircle" />
-          <path opacity="1" fill="#ea5063" stroke="none" stroke-width="0.14481041" stroke-linecap="butt" stroke-linejoin="miter" stroke-opacity="1" d="m 94.160624,152.74944 c -1.356912,0 -2.669682,0.18772 -3.914406,0.53824 0.417399,-4e-4 0.850504,0.081 1.292263,0.2356 0.284247,-0.10078 0.586574,-0.18581 0.904216,-0.25258 0.153175,-0.0322 0.309822,-0.0601 0.469503,-0.0837 0.399192,-0.0589 0.817516,-0.0902 1.248424,-0.0902 0.09801,0 0.195258,0.002 0.291884,0.005 0.03582,-0.13307 0.07112,-0.24324 0.108325,-0.32129 0.0044,-0.009 0.0092,-0.0164 0.01357,-0.0249 -0.137495,-0.004 -0.27535,-0.006 -0.413784,-0.006 z m 4.260029,1.02216 c -0.279269,0.008 -0.565375,0.0393 -0.856984,0.0933 0.04564,0.0243 0.09112,0.0489 0.135194,0.0741 0.05688,0.0326 0.112371,0.0662 0.166589,0.1004 h 2.82e-4 c 0.216793,0.1369 0.411747,0.28644 0.581222,0.44659 h 2.83e-4 c 0.250085,0.23636 0.443991,0.49618 0.570474,0.77298 2.922627,0.48867 5.405607,1.83218 7.066297,3.80693 -1.42143,-2.09049 -3.37789,-3.78761 -5.67306,-4.89413 l -0.001,0.003 c -0.526754,-0.25352 -1.101708,-0.3863 -1.711989,-0.40331 -0.09154,-0.002 -0.183805,-0.002 -0.276894,0 z m -8.997196,1.26427 c -2.917942,0.29666 -5.459929,1.57715 -7.042538,3.82389 l -5.66e-4,-2.8e-4 c -1.65559,2.34605 -2.628366,5.20847 -2.628366,8.2986 0,1.09869 0.123515,2.16839 0.35637,3.19658 -0.385733,-3.17973 0.805744,-6.62247 3.384095,-9.50064 1.5846,-1.76886 3.577938,-3.19628 5.769224,-4.193 -0.04433,-0.11341 -0.07865,-0.22923 -0.09956,-0.3476 -0.01755,-0.0994 -0.02659,-0.20029 -0.02659,-0.30263 0,-0.10234 0.009,-0.20327 0.02659,-0.30263 0.04136,-0.23419 0.131353,-0.45906 0.261338,-0.67229 z m 9.350171,2.1351 c -0.257602,0.34503 -0.625427,0.65379 -1.074765,0.91157 -0.244236,0.14011 -0.513635,0.26516 -0.80268,0.37391 1.228663,1.83194 2.356487,4.06242 3.250027,6.55549 1.35205,3.77235 1.9135,7.42532 1.72585,10.28946 -0.0938,1.43208 -0.3743,2.66768 -0.84086,3.6231 -0.28916,0.59214 -0.65087,1.07701 -1.083533,1.43197 2.417843,-1.06148 4.488363,-2.76707 5.993793,-4.90064 l -0.001,-8.1e-4 c 1.73426,-2.46204 1.99232,-5.61811 1.00151,-8.73755 -0.9908,-3.11945 -3.23226,-6.19836 -6.48932,-8.49262 -0.549391,-0.38699 -1.110662,-0.73615 -1.678891,-1.05384 z m -7.777338,1.10531 c -2.956087,3.40881 -5.172247,8.14145 -5.854357,12.55241 -0.356568,2.30578 -0.267285,4.34794 0.213821,5.95504 0.481107,1.6071 1.350882,2.77731 2.556244,3.35751 l -0.0017,0.003 c 0.37313,0.17987 0.755871,0.34318 1.146039,0.491 l 0.0011,-0.003 c 1.324897,0.50187 2.820986,0.78696 4.341484,0.85869 -0.03167,-0.0914 -0.05941,-0.20903 -0.08541,-0.36203 -0.05715,-0.33628 -0.104816,-0.82477 -0.141699,-1.4532 -0.07377,-1.25686 -0.105547,-3.07065 -0.08966,-5.31302 0.03178,-4.48474 0.25288,-10.00137 0.580373,-14.47425 0.02503,-0.34179 0.05078,-0.65344 0.07636,-0.97464 -0.957762,-0.0459 -1.839723,-0.24624 -2.570385,-0.56001 -0.05853,-0.0252 -0.115694,-0.0512 -0.172245,-0.0778 z" id="redcircle" />
-        </g>
-      </svg>
-    </div>
+    <!-- ===== PROJECTS GALLERY ===== -->
+    <section class="section section--alt" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">Portfolio</p>
+          <h2 class="section-title reveal d1">Recent projects.</h2>
+          <p class="section-sub reveal d2">Swipe through real work — no stock-photo promises.</p>
+        </div>
 
-    <div class="container stats__content">
-      <div class="stats__grid">
-        <div class="stat animate-on-scroll">
-          <div class="stat__value" data-count="500">0+</div>
-          <div class="stat__label">Pools Serviced</div>
-        </div>
-        <div class="stat animate-on-scroll delay-1">
-          <div class="stat__value" data-count="15">0+</div>
-          <div class="stat__label">Years Experience</div>
-        </div>
-        <div class="stat animate-on-scroll delay-2">
-          <div class="stat__value" data-count="100">0%</div>
-          <div class="stat__label">Satisfaction Rate</div>
-        </div>
-        <div class="stat animate-on-scroll delay-3">
-          <div class="stat__value" data-suffix="/7" data-count="24">0/7</div>
-          <div class="stat__label">Emergency Support</div>
-        </div>
-      </div>
-    </div>
-  </section>
+        <div class="gallery reveal">
+          <div class="gallery__track" id="galleryTrack" tabindex="0" aria-label="Project gallery, scroll horizontally">
+            <figure class="gallery__card">
+              <img src="assets/img/reno-cape-960.webp" srcset="assets/img/reno-cape-640.webp 640w, assets/img/reno-cape-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Before and after of a full pool and backyard renovation" width="960" height="536" loading="lazy" decoding="async">
+              <figcaption class="gallery__caption">
+                <strong>Full renovation</strong>
+                <span>Deck + resurface</span>
+              </figcaption>
+            </figure>
+            <figure class="gallery__card">
+              <img src="assets/img/reno-karoo-960.webp" srcset="assets/img/reno-karoo-640.webp 640w, assets/img/reno-karoo-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Before and after of a neglected pool transformed with new paving and pergola" width="960" height="536" loading="lazy" decoding="async">
+              <figcaption class="gallery__caption">
+                <strong>Backyard transformation</strong>
+                <span>Reno + landscaping</span>
+              </figcaption>
+            </figure>
+            <figure class="gallery__card">
+              <img src="assets/img/scrub-960.webp" srcset="assets/img/scrub-640.webp 640w, assets/img/scrub-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Technician deep-cleaning a pool with vacuum and net" width="960" height="536" loading="lazy" decoding="async">
+              <figcaption class="gallery__caption">
+                <strong>Deep clean</strong>
+                <span>Weekly service</span>
+              </figcaption>
+            </figure>
+            <figure class="gallery__card">
+              <img src="assets/img/construction-960.webp" srcset="assets/img/construction-640.webp 640w, assets/img/construction-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Pool shell stripped back during resurfacing works" width="960" height="536" loading="lazy" decoding="async">
+              <figcaption class="gallery__caption">
+                <strong>Resurfacing</strong>
+                <span>In progress</span>
+              </figcaption>
+            </figure>
+            <figure class="gallery__card">
+              <img src="assets/img/cleaning-960.webp" srcset="assets/img/cleaning-640.webp 640w, assets/img/cleaning-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Technician hand-scrubbing pool waterline tiles" width="960" height="536" loading="lazy" decoding="async">
+              <figcaption class="gallery__caption">
+                <strong>Tile restoration</strong>
+                <span>Waterline detail</span>
+              </figcaption>
+            </figure>
+          </div>
 
-  <!-- ===== RECENT PROJECTS ===== -->
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-eyebrow animate-on-scroll">Portfolio</p>
-        <h2 class="section-title animate-on-scroll delay-1">Our Recent Projects</h2>
-        <p class="section-subtitle animate-on-scroll delay-2">See the difference professional care makes.</p>
-      </div>
-
-      <div class="projects__grid">
-        <!-- Item 1 -->
-        <div class="project-card animate-on-scroll">
-          <img src="assets/dirty-pool.png" alt="Pool condition before cleaning" width="640" height="400" loading="lazy">
-          <div class="project-card__overlay">
-             <h3>Before Cleaning</h3>
-          </div>
-        </div>
-        <!-- Item 2 -->
-        <div class="project-card animate-on-scroll delay-1">
-          <img src="assets/bantu-pools-pool-clean.png" alt="Crystal clear pool after cleaning" width="640" height="400" loading="lazy">
-          <div class="project-card__overlay">
-             <h3>After Cleaning</h3>
-          </div>
-        </div>
-        <!-- Item 3 -->
-        <div class="project-card animate-on-scroll delay-2">
-          <img src="assets/pool-construction.png" alt="New pool construction" width="640" height="400" loading="lazy">
-          <div class="project-card__overlay">
-             <h3>New Construction</h3>
-          </div>
-        </div>
-        <!-- Item 4 -->
-        <div class="project-card animate-on-scroll delay-2">
-          <img src="assets/renovation.png" alt="Modern pool renovation" width="640" height="400" loading="lazy">
-          <div class="project-card__overlay">
-             <h3>Modern Renovation</h3>
-          </div>
-        </div>
-        <!-- Item 5 -->
-        <div class="project-card project-card--centered animate-on-scroll delay-2">
-          <img src="assets/reno-pool.png" alt="Completed pool resurfacing and renovation" width="640" height="400" loading="lazy">
-          <div class="project-card__overlay">
-             <h3>Resurfacing Complete</h3>
+          <div class="gallery__nav">
+            <button class="gallery__btn" id="galleryPrev" type="button" aria-label="Scroll gallery backwards">
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
+            </button>
+            <button class="gallery__btn" id="galleryNext" type="button" aria-label="Scroll gallery forwards">
+              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+            </button>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ===== CTA SECTION ===== -->
-  <section class="cta" id="contact">
-    <div class="container cta__content">
-      <h2 class="cta__title animate-on-scroll">Ready to dive in?</h2>
-      <p class="cta__desc animate-on-scroll delay-1">
-        Contact us today for a free consultation. Whether you need a one-time clean or a full renovation, we're here to help.
-      </p>
-      <div class="cta__actions animate-on-scroll delay-2">
-        <a href="https://wa.me/27836883238" class="btn btn--white btn--lg" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined">chat</span>
-          WhatsApp Us
-        </a>
-        <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20quote%20please" class="btn btn--outline-light btn--lg" target="_blank" rel="noopener noreferrer">
-          <span class="material-symbols-outlined">request_quote</span>
-          Get a Quote
-        </a>
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section" id="reviews">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">Word of mouth</p>
+          <h2 class="section-title reveal d1">Neighbours talk. <span class="tint">So do pools.</span></h2>
+        </div>
+
+        <div class="quotes">
+          <figure class="quote-card reveal">
+            <div class="quote-card__stars" aria-label="5 out of 5 stars">
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+            </div>
+            <blockquote class="quote-card__text">
+              My pool was green for two years. Bantu Pools had it crystal clear in under a week — and it's stayed that way ever since.
+            </blockquote>
+            <figcaption class="quote-card__author">
+              <span class="quote-card__avatar" aria-hidden="true">TM</span>
+              <span>
+                <span class="quote-card__name">Thabo M.</span><br>
+                <span class="quote-card__meta">Green-to-clean rescue</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="quote-card reveal d1">
+            <div class="quote-card__stars" aria-label="5 out of 5 stars">
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+            </div>
+            <blockquote class="quote-card__text">
+              Best service in the area. The team is professional, punctual and incredibly thorough — my pool has never looked better.
+            </blockquote>
+            <figcaption class="quote-card__author">
+              <span class="quote-card__avatar" aria-hidden="true">SJ</span>
+              <span>
+                <span class="quote-card__name">Sarah J.</span><br>
+                <span class="quote-card__meta">Weekly maintenance</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="quote-card reveal d2">
+            <div class="quote-card__stars" aria-label="5 out of 5 stars">
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+              <svg class="icon" aria-hidden="true"><use href="#i-star"/></svg>
+            </div>
+            <blockquote class="quote-card__text">
+              They renovated our 20-year-old pool and it looks brand new. On budget, on time, and the quality is outstanding.
+            </blockquote>
+            <figcaption class="quote-card__author">
+              <span class="quote-card__avatar" aria-hidden="true">PN</span>
+              <span>
+                <span class="quote-card__name">Priya N.</span><br>
+                <span class="quote-card__meta">Full renovation</span>
+              </span>
+            </figcaption>
+          </figure>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <div class="cta__panel reveal">
+          <div class="cta__content">
+            <h2 class="cta__title">Ready for the clearest water on the street?</h2>
+            <p class="cta__desc">
+              Free quotes, fast scheduling, and work we stand behind. One message is all it takes.
+            </p>
+            <div class="cta__actions">
+              <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20please" class="btn btn--white btn--lg" target="_blank" rel="noopener noreferrer">
+                <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+                WhatsApp us
+              </a>
+              <a href="tel:+27836883238" class="btn btn--ghost btn--lg">
+                <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
+                083 688 3238
+              </a>
+            </div>
+            <p class="cta__note">Mon–Sat, 07:00–17:00 · Emergency call-outs 24/7</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
       <div class="footer__grid">
         <div>
-          <a href="index.html" class="nav__logo nav__logo--light">
-            <img src="assets/logo/bantu-pools-logo.png" alt="Bantu Pools Logo" height="50" class="nav__logo-img">
+          <a href="index.html" class="footer__logo" aria-label="Bantu Pools — home">
+            <img src="assets/logo/logo-nav.png" alt="" width="42" height="36">
+            Bantu&nbsp;Pools
           </a>
-          <p class="footer__brand-desc">
-            Professional pool services dedicated to keeping your water crystal clear and your equipment running smoothly. Licensed &amp; Insured.
+          <p class="footer__desc">
+            Professional pool care for Johannesburg &amp; surrounds — keeping your water crystal clear
+            and your equipment running smoothly. Licensed &amp; insured.
           </p>
-          <div class="footer__social">
-            <a href="#" class="footer__social-link" aria-label="Facebook" rel="noopener noreferrer">
-              <span class="material-symbols-outlined">public</span>
-            </a>
-            <a href="https://wa.me/27836883238" class="footer__social-link" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-outlined">chat</span>
-            </a>
-            <a href="https://wa.me/27836883238" class="footer__social-link" aria-label="WhatsApp Chat" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-outlined">forum</span>
-            </a>
-          </div>
         </div>
 
-        <div>
+        <nav aria-label="Services">
           <h4 class="footer__title">Services</h4>
           <div class="footer__links">
-            <a href="services.html#cleaning" class="footer__link">Cleaning</a>
-            <a href="services.html#repairs" class="footer__link">Repairs</a>
+            <a href="services.html#cleaning" class="footer__link">Cleaning &amp; maintenance</a>
+            <a href="services.html#repairs" class="footer__link">Equipment repairs</a>
             <a href="services.html#renovations" class="footer__link">Renovations</a>
-            <a href="services.html" class="footer__link">Commercial</a>
+            <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20please" class="footer__link" target="_blank" rel="noopener noreferrer">Free quotes</a>
           </div>
-        </div>
+        </nav>
 
-        <div>
-          <h4 class="footer__title">Company</h4>
+        <nav aria-label="Explore">
+          <h4 class="footer__title">Explore</h4>
           <div class="footer__links">
-            <a href="#" class="footer__link">About Us</a>
-            <a href="#" class="footer__link">Careers</a>
-            <a href="#" class="footer__link">Blog</a>
-            <a href="#contact" class="footer__link">Contact</a>
+            <a href="index.html" class="footer__link">Home</a>
+            <a href="#results" class="footer__link">Before &amp; after</a>
+            <a href="#projects" class="footer__link">Projects</a>
+            <a href="#reviews" class="footer__link">Reviews</a>
           </div>
-        </div>
+        </nav>
 
         <div>
-          <h4 class="footer__title">Connect</h4>
+          <h4 class="footer__title">Get in touch</h4>
           <div class="footer__links">
             <a href="https://wa.me/27836883238" class="footer__link" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-outlined icon--inline">chat</span>
-              WhatsApp Us
+              <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+              WhatsApp us
             </a>
-            <a href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20to%20enquire%20about%20your%20services" class="footer__link" target="_blank" rel="noopener noreferrer">
-              <span class="material-symbols-outlined icon--inline">forum</span>
+            <a href="tel:+27836883238" class="footer__link">
+              <svg class="icon" aria-hidden="true"><use href="#i-phone"/></svg>
               +27 83 688 3238
             </a>
+            <span class="footer__link">
+              <svg class="icon" aria-hidden="true"><use href="#i-clock"/></svg>
+              Mon–Sat, 07:00–17:00
+            </span>
+            <span class="footer__link">
+              <svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>
+              Johannesburg &amp; surrounds
+            </span>
           </div>
         </div>
       </div>
 
       <div class="footer__bottom">
-        <span>&copy; 2026 Bantu Pools. All rights reserved.</span>
-        <div class="footer__bottom-links">
-          <a href="#" class="footer__link">Privacy Policy</a>
-          <a href="#" class="footer__link">Terms of Service</a>
-        </div>
+        <span>&copy; <span id="year">2026</span> Bantu Pools. All rights reserved.</span>
+        <span>Crystal-clear results, guaranteed.</span>
       </div>
     </div>
+    <p class="footer__watermark" aria-hidden="true">BANTU POOLS</p>
   </footer>
 
-  <script src="main.js"></script>
+  <!-- WhatsApp floating action button -->
+  <a href="https://wa.me/27836883238" class="fab" target="_blank" rel="noopener noreferrer" aria-label="Chat with Bantu Pools on WhatsApp">
+    <svg class="icon" aria-hidden="true"><use href="#i-whatsapp"/></svg>
+  </a>
+
 </body>
 </html>
