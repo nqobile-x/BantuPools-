@@ -1,62 +1,12 @@
 /**
  * Bantu Pools — Main TypeScript
- * Handles: scroll animations, nav, service tabs, stat counters, security & privacy.
- * All event listeners attached via addEventListener — zero inline handlers.
+ * Handles: nav, scroll reveals, stat counters, ARIA tabs,
+ * before/after slider, gallery controls, privacy hardening.
+ * All listeners attached via addEventListener — zero inline handlers.
  */
 'use strict';
 /* ================================================
-   2. SECURITY UTILITIES
-   ================================================ */
-/**
- * Sanitise user-provided strings to prevent XSS.
- * Creates a text node (auto-escapes HTML entities) and reads innerHTML.
- */
-function sanitise(str) {
-    const div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
-}
-/** Input validation patterns — frozen to prevent tampering. */
-const VALIDATORS = Object.freeze({
-    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    phone: /^[\d\s\-+()]{7,20}$/,
-    name: /^[a-zA-Z\s\-']{2,80}$/,
-    message: /^.{10,2000}$/s,
-});
-/** Rate limiter to prevent form submission spam. */
-const RateLimiter = (() => {
-    let lastSubmission = 0;
-    const MIN_INTERVAL_MS = 3000; // 3 seconds between submissions
-    return {
-        canSubmit() {
-            const now = Date.now();
-            if (now - lastSubmission < MIN_INTERVAL_MS) {
-                return false;
-            }
-            lastSubmission = now;
-            return true;
-        },
-    };
-})();
-/* ================================================
-   3. SCROLL-TRIGGERED ANIMATIONS (IntersectionObserver)
-   ================================================ */
-function initScrollAnimations() {
-    const elements = document.querySelectorAll('.animate-on-scroll');
-    if (!elements.length)
-        return;
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-    elements.forEach((el) => observer.observe(el));
-}
-/* ================================================
-   4. NAVIGATION
+   1. NAVIGATION
    ================================================ */
 function initNav() {
     const nav = document.getElementById('mainNav');
@@ -64,246 +14,200 @@ function initNav() {
     const links = document.getElementById('navLinks');
     if (!nav || !toggle || !links)
         return;
-    /* Scroll shadow */
+    /* Scrolled state — denser glass pill */
     window.addEventListener('scroll', () => {
         nav.classList.toggle('nav--scrolled', window.scrollY > 20);
     }, { passive: true });
-    /* Mobile hamburger toggle */
+    const closeMenu = () => {
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open menu');
+        document.body.style.overflow = '';
+    };
+    /* Full-screen mobile menu */
     toggle.addEventListener('click', () => {
-        const isOpen = links.classList.toggle('active');
-        toggle.classList.toggle('active');
+        const isOpen = links.classList.toggle('open');
         toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Open menu');
         document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-    /* Close mobile menu on link click */
-    links.querySelectorAll('.nav__link').forEach((link) => {
-        link.addEventListener('click', () => {
-            links.classList.remove('active');
-            toggle.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        });
+    links.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', closeMenu);
     });
-    /* Close on outside click */
-    document.addEventListener('click', (e) => {
-        if (!nav.contains(e.target) && links.classList.contains('active')) {
-            links.classList.remove('active');
-            toggle.classList.remove('active');
-            toggle.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && links.classList.contains('open')) {
+            closeMenu();
+            toggle.focus();
         }
     });
 }
 /* ================================================
-   5. STAT COUNTER ANIMATION
+   2. SCROLL REVEALS (IntersectionObserver)
    ================================================ */
-function initStatCounters() {
-    const stats = document.querySelectorAll('.stat__value[data-count]');
-    if (!stats.length)
+function initReveals() {
+    const elements = document.querySelectorAll('.reveal');
+    if (!elements.length)
         return;
+    if (!('IntersectionObserver' in window)) {
+        elements.forEach((el) => el.classList.add('in'));
+        return;
+    }
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                animateCounter(entry.target);
+                entry.target.classList.add('in');
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
-    stats.forEach((stat) => observer.observe(stat));
-}
-/**
- * Animate a single counter from 0 to its data-count value.
- * Uses ease-out cubic for a natural deceleration feel.
- */
-function animateCounter(el) {
-    const target = parseInt(el.dataset.count ?? '0', 10);
-    const suffix = el.dataset.suffix ?? '';
-    const originalText = el.textContent ?? '';
-    const textSuffix = originalText.replace(/[\d,]+/, '').replace(suffix, '');
-    const duration = 2000;
-    const startTime = performance.now();
-    function update(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-        el.textContent = current.toLocaleString() + suffix + textSuffix;
-        if (progress < 1) {
-            requestAnimationFrame(update);
-        }
-    }
-    requestAnimationFrame(update);
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    elements.forEach((el) => observer.observe(el));
 }
 /* ================================================
-   6. SERVICE TABS (services.html)
+   3. STAT COUNTERS
    ================================================ */
-function initServiceTabs() {
-    const tabs = document.querySelectorAll('.service-tab');
-    const panels = document.querySelectorAll('.service-detail');
-    if (!tabs.length || !panels.length)
+function initStatCounters() {
+    const stats = document.querySelectorAll('.stat__num[data-count]');
+    if (!stats.length)
         return;
-    tabs.forEach((tab) => {
-        tab.addEventListener('click', () => {
-            const targetId = tab.dataset.tab;
-            /* Update active tab */
-            tabs.forEach((t) => t.classList.remove('service-tab--active'));
-            tab.classList.add('service-tab--active');
-            /* Show target panel */
-            panels.forEach((panel) => {
-                panel.classList.remove('active');
-                if (panel.id === targetId) {
-                    panel.classList.add('active');
-                    /* Re-trigger animations for newly visible content */
-                    panel.querySelectorAll('.animate-on-scroll').forEach((el) => {
-                        el.classList.remove('visible');
-                        void el.offsetWidth; // force reflow
-                        el.classList.add('visible');
-                    });
-                }
-            });
-        });
-    });
-    /* Handle hash-based deep linking (e.g. services.html#repairs) */
-    const hash = window.location.hash.replace('#', '');
-    if (hash) {
-        const sanitisedHash = sanitise(hash);
-        const targetTab = document.querySelector(`.service-tab[data-tab="${sanitisedHash}"]`);
-        if (targetTab) {
-            targetTab.click();
-            /* Scroll to services content area after a brief delay */
-            setTimeout(() => {
-                const contentSection = document.getElementById('services-content');
-                if (contentSection) {
-                    contentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            }, 300);
-        }
-    }
-}
-/* ================================================
-   7. SMOOTH SCROLL FOR ANCHOR LINKS
-   ================================================ */
-function initSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener('click', (e) => {
-            const targetId = anchor.getAttribute('href');
-            if (!targetId || targetId === '#')
-                return;
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                const navHeight = document.getElementById('mainNav')?.offsetHeight ?? 72;
-                const top = target.getBoundingClientRect().top + window.scrollY - navHeight;
-                window.scrollTo({ top, behavior: 'smooth' });
-            }
-        });
-    });
-}
-/* ================================================
-   8. CONTACT FORM VALIDATION (if present)
-   ================================================ */
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form)
-        return;
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        /* Rate-limit submissions */
-        if (!RateLimiter.canSubmit()) {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const render = (el, value) => {
+        el.textContent = value.toLocaleString() + (el.dataset.suffix ?? '');
+    };
+    const animate = (el) => {
+        const target = parseInt(el.dataset.count ?? '0', 10);
+        if (reduceMotion) {
+            render(el, target);
             return;
         }
-        /* Check honeypot — if filled, it's a bot */
-        const honeypot = form.querySelector('.ohnohoney input');
-        if (honeypot && honeypot.value) {
-            return; // silently ignore bot submission
-        }
-        let isValid = true;
-        /* Validate each field */
-        const fields = [
-            { id: 'name', validator: VALIDATORS.name, msg: 'Please enter a valid name (2–80 chars).' },
-            { id: 'email', validator: VALIDATORS.email, msg: 'Please enter a valid email address.' },
-            { id: 'message', validator: VALIDATORS.message, msg: 'Message must be 10–2000 characters.' },
-        ];
-        fields.forEach(({ id, validator, msg }) => {
-            const input = form.querySelector(`#${id}`);
-            const error = form.querySelector(`#${id}-error`);
-            if (!input || !error)
-                return;
-            const value = input.value.trim();
-            if (!validator.test(value)) {
-                error.textContent = msg;
-                error.style.display = 'block';
-                input.style.borderColor = '#ef4444';
-                isValid = false;
-            }
-            else {
-                error.style.display = 'none';
-                input.style.borderColor = '';
+        const duration = 1800;
+        const start = performance.now();
+        const tick = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            render(el, Math.round(eased * target));
+            if (progress < 1)
+                requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+    };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                animate(entry.target);
+                observer.unobserve(entry.target);
             }
         });
-        if (isValid) {
-            /* Sanitise values before any processing — never trust user input */
-            const nameInput = form.querySelector('#name');
-            const emailInput = form.querySelector('#email');
-            const messageInput = form.querySelector('#message');
-            if (!nameInput || !emailInput || !messageInput)
-                return;
-            const formData = {
-                name: sanitise(nameInput.value.trim()),
-                email: sanitise(emailInput.value.trim()),
-                message: sanitise(messageInput.value.trim()),
-            };
-            // In production, POST formData to a secure backend via HTTPS.
-            // No console.log — never expose user data to devtools.
-            void formData;
-            /* Show success state */
-            const submitBtn = form.querySelector('button[type="submit"]');
-            if (submitBtn) {
-                submitBtn.textContent = 'Message Sent ✓';
-                submitBtn.disabled = true;
-                submitBtn.style.opacity = '0.7';
+    }, { threshold: 0.4 });
+    stats.forEach((stat) => observer.observe(stat));
+}
+/* ================================================
+   4. SERVICE TABS (services.html) — ARIA tablist
+   ================================================ */
+function initServiceTabs() {
+    const tablist = document.querySelector('[role="tablist"]');
+    if (!tablist)
+        return;
+    const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    if (!tabs.length || !panels.length)
+        return;
+    const select = (tab, focus = true) => {
+        tabs.forEach((t) => {
+            const active = t === tab;
+            t.setAttribute('aria-selected', String(active));
+            t.tabIndex = active ? 0 : -1;
+        });
+        panels.forEach((panel) => {
+            panel.hidden = panel.id !== tab.getAttribute('aria-controls');
+            if (!panel.hidden) {
+                /* Re-run reveal animations inside the freshly shown panel */
+                panel.querySelectorAll('.reveal').forEach((el) => el.classList.add('in'));
             }
-            form.reset();
-        }
+        });
+        if (focus)
+            tab.focus();
+    };
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', () => select(tab, false));
+        tab.addEventListener('keydown', (e) => {
+            const i = tabs.indexOf(tab);
+            let next = null;
+            if (e.key === 'ArrowRight')
+                next = (i + 1) % tabs.length;
+            else if (e.key === 'ArrowLeft')
+                next = (i - 1 + tabs.length) % tabs.length;
+            else if (e.key === 'Home')
+                next = 0;
+            else if (e.key === 'End')
+                next = tabs.length - 1;
+            if (next !== null) {
+                e.preventDefault();
+                const target = tabs[next];
+                if (target)
+                    select(target);
+            }
+        });
     });
+    /* Deep links: services.html#repairs activates the matching tab */
+    const applyHash = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (!hash)
+            return;
+        const tab = document.getElementById(`tab-${CSS.escape(hash)}`);
+        if (tab) {
+            select(tab, false);
+            const content = document.getElementById('services-content');
+            content?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    };
+    applyHash();
+    window.addEventListener('hashchange', applyHash);
 }
 /* ================================================
-   9. SVG GSAP ANIMATION
+   5. BEFORE / AFTER SLIDER
    ================================================ */
-function initSvgAnimation() {
-    const redcircle = document.getElementById("redcircle");
-    if (redcircle && typeof gsap !== 'undefined') {
-        gsap.to(redcircle, {
-            duration: 4,
-            x: "-50px",
-            y: "-40px",
-            repeat: -1,
-            yoyo: true,
-            repeatDelay: 0.2,
-            ease: "sine.inOut"
-        });
-    }
-    const bluecircle = document.getElementById("bluecircle");
-    if (bluecircle && typeof gsap !== 'undefined') {
-        gsap.to(bluecircle, {
-            duration: 5,
-            x: "30px",
-            y: "20px",
-            repeat: -1,
-            yoyo: true,
-            repeatDelay: 0.5,
-            ease: "sine.inOut"
-        });
-    }
+function initBeforeAfter() {
+    const container = document.getElementById('beforeAfter');
+    if (!container)
+        return;
+    const range = container.querySelector('.ba__range');
+    if (!range)
+        return;
+    const update = () => {
+        container.style.setProperty('--pos', `${range.value}%`);
+    };
+    range.addEventListener('input', update);
+    update();
 }
 /* ================================================
-   10. PRIVACY GUARD
+   6. GALLERY SCROLL CONTROLS
    ================================================ */
-/**
- * Blocks common privacy leakage vectors at runtime.
- */
+function initGallery() {
+    const track = document.getElementById('galleryTrack');
+    const prev = document.getElementById('galleryPrev');
+    const next = document.getElementById('galleryNext');
+    if (!track || !prev || !next)
+        return;
+    const step = () => {
+        const card = track.querySelector('.gallery__card');
+        return card ? card.offsetWidth + 24 : 360;
+    };
+    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
+}
+/* ================================================
+   7. FOOTER YEAR
+   ================================================ */
+function initYear() {
+    const el = document.getElementById('year');
+    if (el)
+        el.textContent = String(new Date().getFullYear());
+}
+/* ================================================
+   8. PRIVACY GUARD
+   ================================================ */
+/** Blocks common privacy-leakage vectors at runtime. */
 function initPrivacyGuard() {
-    /* Disable Beacon API to prevent data exfiltration */
     if ('sendBeacon' in navigator) {
         Object.defineProperty(navigator, 'sendBeacon', {
             value: () => false,
@@ -311,14 +215,12 @@ function initPrivacyGuard() {
             configurable: false,
         });
     }
-    /* Prevent WebRTC IP leakage by overriding RTCPeerConnection */
     if ('RTCPeerConnection' in window) {
         window.RTCPeerConnection = undefined;
     }
     if ('webkitRTCPeerConnection' in window) {
         window.webkitRTCPeerConnection = undefined;
     }
-    /* Block Battery API if exposed */
     if ('getBattery' in navigator) {
         Object.defineProperty(navigator, 'getBattery', {
             value: () => Promise.reject(new Error('Blocked for privacy')),
@@ -328,15 +230,15 @@ function initPrivacyGuard() {
     }
 }
 /* ================================================
-   11. INITIALISE EVERYTHING ON DOM READY
+   INITIALISE ON DOM READY
    ================================================ */
 document.addEventListener('DOMContentLoaded', () => {
     initPrivacyGuard();
     initNav();
-    initScrollAnimations();
+    initReveals();
     initStatCounters();
     initServiceTabs();
-    initSmoothScroll();
-    initContactForm();
-    initSvgAnimation();
+    initBeforeAfter();
+    initGallery();
+    initYear();
 });
