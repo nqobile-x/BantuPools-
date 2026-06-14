@@ -1198,6 +1198,77 @@ p {
   color: var(--text-3);
 }
 
+/* ---------- FAQ ---------- */
+.faq {
+  max-width: 780px;
+  margin-inline: auto;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.faq__item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  transition: box-shadow var(--t-base), border-color var(--t-base);
+}
+
+.faq__item:hover {
+  border-color: oklch(58% 0.155 247 / 0.4);
+}
+
+.faq__item[open] {
+  box-shadow: var(--shadow-md);
+  border-color: oklch(58% 0.155 247 / 0.4);
+}
+
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.4rem;
+  font-weight: 800;
+  font-size: 1.02rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--ink);
+}
+
+.faq__q::-webkit-details-marker {
+  display: none;
+}
+
+.faq__q::after {
+  content: '+';
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: oklch(58% 0.155 247 / 0.1);
+  color: var(--azure);
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1;
+  transition: rotate var(--t-base), background-color var(--t-base), color var(--t-base);
+}
+
+.faq__item[open] .faq__q::after {
+  rotate: 45deg;
+  background: var(--azure);
+  color: #fff;
+}
+
+.faq__a {
+  padding: 0 1.4rem 1.3rem;
+  color: var(--text-2);
+  font-size: 0.97rem;
+  line-height: 1.7;
+  max-width: 62ch;
+}
+
 /* ---------- CTA Panel ---------- */
 .cta {
   padding-block: 0 var(--section);
