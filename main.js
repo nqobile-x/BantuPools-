@@ -204,7 +204,41 @@ function initYear() {
         el.textContent = String(new Date().getFullYear());
 }
 /* ================================================
-   8. PRIVACY GUARD
+   8. THEME TOGGLE (dark / light)
+   ================================================ */
+/**
+ * Wires the navbar theme button. The initial theme is already applied by
+ * theme.js (in <head>) before paint; this just handles clicks and keeps the
+ * button's accessible state + the address-bar theme colour in sync.
+ */
+function initThemeToggle() {
+    const btn = document.getElementById('themeToggle');
+    if (!btn)
+        return;
+    const root = document.documentElement;
+    const themeColor = document.querySelector('meta[name="theme-color"]');
+    const sync = () => {
+        const isDark = root.getAttribute('data-theme') === 'dark';
+        btn.setAttribute('aria-pressed', String(isDark));
+        btn.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+        if (themeColor)
+            themeColor.setAttribute('content', isDark ? '#0d141d' : '#eaf3f6');
+    };
+    sync();
+    btn.addEventListener('click', () => {
+        const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try {
+            localStorage.setItem('theme', next);
+        }
+        catch {
+            /* storage blocked — theme still applies for this session */
+        }
+        sync();
+    });
+}
+/* ================================================
+   9. PRIVACY GUARD
    ================================================ */
 /** Blocks common privacy-leakage vectors at runtime. */
 function initPrivacyGuard() {
@@ -241,4 +275,5 @@ document.addEventListener('DOMContentLoaded', () => {
     initBeforeAfter();
     initGallery();
     initYear();
+    initThemeToggle();
 });
