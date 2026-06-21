@@ -5,6 +5,7 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
+  color-scheme: light;
   /* Color — oklch palette */
   --ink: oklch(19% 0.033 252);
   --ink-2: oklch(23% 0.042 252);
@@ -15,6 +16,13 @@
   --text: oklch(26% 0.032 252);
   --text-2: oklch(46% 0.026 250);
   --text-3: oklch(62% 0.02 248);
+
+  /* Semantic surface/heading tokens (themeable) */
+  --surface: #fff;
+  --heading: var(--ink);
+  --nav-bg: oklch(100% 0 0 / 0.72);
+  --nav-bg-scrolled: oklch(100% 0 0 / 0.88);
+  --nav-border: oklch(100% 0 0 / 0.55);
 
   --azure: oklch(58% 0.155 247);
   --azure-deep: oklch(46% 0.135 250);
@@ -57,6 +65,28 @@
 
   /* Grain texture (data URI, CSP-safe) */
   --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+}
+
+/* ---------- Dark Theme ---------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --ink: oklch(13% 0.025 255);
+  --ink-2: oklch(17% 0.03 255);
+  --ink-3: oklch(22% 0.038 255);
+  --paper: oklch(17% 0.028 260);
+  --paper-2: oklch(21% 0.032 260);
+  --line: oklch(33% 0.028 260);
+  --text: oklch(91% 0.012 240);
+  --text-2: oklch(75% 0.018 245);
+  --text-3: oklch(62% 0.02 248);
+  --surface: oklch(23% 0.034 260);
+  --heading: oklch(97% 0.01 230);
+  --nav-bg: oklch(20% 0.03 260 / 0.72);
+  --nav-bg-scrolled: oklch(19% 0.03 260 / 0.92);
+  --nav-border: oklch(100% 0 0 / 0.1);
+  --shadow-sm: 0 1px 2px oklch(0% 0 0 / 0.35), 0 4px 12px oklch(0% 0 0 / 0.3);
+  --shadow-md: 0 2px 4px oklch(0% 0 0 / 0.35), 0 12px 32px oklch(0% 0 0 / 0.45);
+  --shadow-lg: 0 4px 8px oklch(0% 0 0 / 0.4), 0 24px 64px oklch(0% 0 0 / 0.55);
 }
 
 /* Cross-document view transitions between pages */
@@ -145,7 +175,7 @@ h4 {
   font-weight: 700;
   line-height: 1.08;
   letter-spacing: -0.025em;
-  color: var(--ink);
+  color: var(--heading);
   text-wrap: balance;
 }
 
@@ -377,17 +407,17 @@ p {
   gap: 1rem;
   height: 64px;
   padding-inline: 0.6rem 0.6rem;
-  background: oklch(100% 0 0 / 0.72);
+  background: var(--nav-bg);
   backdrop-filter: blur(18px) saturate(1.4);
   -webkit-backdrop-filter: blur(18px) saturate(1.4);
-  border: 1px solid oklch(100% 0 0 / 0.55);
+  border: 1px solid var(--nav-border);
   border-radius: 999px;
   box-shadow: var(--shadow-sm);
   transition: box-shadow var(--t-base), background-color var(--t-base);
 }
 
 .nav--scrolled .nav__inner {
-  background: oklch(100% 0 0 / 0.88);
+  background: var(--nav-bg-scrolled);
   box-shadow: var(--shadow-md);
 }
 
@@ -400,7 +430,7 @@ p {
   font-weight: 800;
   font-size: 1.12rem;
   letter-spacing: -0.02em;
-  color: var(--ink);
+  color: var(--heading);
   white-space: nowrap;
 }
 
@@ -413,6 +443,13 @@ p {
   display: flex;
   align-items: center;
   gap: clamp(1rem, 2.5vw, 2rem);
+  margin-left: auto;
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .nav__link {
@@ -438,7 +475,7 @@ p {
 
 .nav__link:hover,
 .nav__link--active {
-  color: var(--ink);
+  color: var(--heading);
 }
 
 .nav__link:hover::after,
@@ -449,6 +486,48 @@ p {
 .nav__cta {
   padding: 0.6rem 1.3rem;
   font-size: var(--fs-sm);
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--heading);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  transition: transform var(--t-fast), background-color var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+
+.theme-toggle:hover {
+  transform: translateY(-2px) rotate(-12deg);
+  border-color: var(--azure);
+  color: var(--azure);
+}
+
+.theme-toggle .icon {
+  width: 19px;
+  height: 19px;
+}
+
+/* Show the icon of the mode you'll switch TO: moon in light, sun in dark */
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+.theme-toggle .icon-moon {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
 }
 
 /* Burger */
@@ -706,7 +785,7 @@ p {
   display: flex;
   flex-direction: column;
   border-radius: var(--r-lg);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   overflow: hidden;
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
@@ -987,7 +1066,7 @@ p {
 .step {
   position: relative;
   padding: clamp(1.6rem, 3vw, 2.2rem);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   transition: transform var(--t-base), box-shadow var(--t-base);
@@ -1109,8 +1188,8 @@ p {
   height: 46px;
   border-radius: 50%;
   border: 1.5px solid var(--line);
-  color: var(--ink);
-  background: #fff;
+  color: var(--heading);
+  background: var(--surface);
   transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
 }
 
@@ -1138,7 +1217,7 @@ p {
   flex-direction: column;
   gap: 1rem;
   padding: clamp(1.6rem, 3vw, 2rem);
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
   transition: transform var(--t-base), box-shadow var(--t-base);
@@ -1189,7 +1268,7 @@ p {
 .quote-card__name {
   font-weight: 800;
   font-size: var(--fs-sm);
-  color: var(--ink);
+  color: var(--heading);
   line-height: 1.3;
 }
 
@@ -1207,7 +1286,7 @@ p {
 }
 
 .faq__item {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   transition: box-shadow var(--t-base), border-color var(--t-base);
@@ -1232,7 +1311,7 @@ p {
   font-size: 1.02rem;
   cursor: pointer;
   list-style: none;
-  color: var(--ink);
+  color: var(--heading);
 }
 
 .faq__q::-webkit-details-marker {
@@ -1549,7 +1628,7 @@ p {
 }
 
 .tab:hover {
-  color: var(--ink);
+  color: var(--heading);
 }
 
 .tab[aria-selected="true"] {
@@ -1624,7 +1703,7 @@ p {
   display: flex;
   gap: 0.9rem;
   padding: 1.2rem 1.3rem;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   transition: transform var(--t-base), box-shadow var(--t-base), border-color var(--t-base);
@@ -1726,7 +1805,7 @@ p {
   line-height: 1.4;
   max-width: 740px;
   margin: 0 auto 1.5rem;
-  color: var(--ink);
+  color: var(--heading);
   text-wrap: balance;
 }
 
