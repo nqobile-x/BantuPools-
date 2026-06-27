@@ -167,7 +167,7 @@ function initServiceTabs() {
    5. BEFORE / AFTER SLIDER
    ================================================ */
 function initBeforeAfter() {
-    document.querySelectorAll('.ba').forEach(container => {
+    document.querySelectorAll('.ba').forEach((container) => {
         const range = container.querySelector('.ba__range');
         if (!range)
             return;
