@@ -167,17 +167,16 @@ function initServiceTabs() {
    5. BEFORE / AFTER SLIDER
    ================================================ */
 function initBeforeAfter() {
-    const container = document.getElementById('beforeAfter');
-    if (!container)
-        return;
-    const range = container.querySelector('.ba__range');
-    if (!range)
-        return;
-    const update = () => {
-        container.style.setProperty('--pos', `${range.value}%`);
-    };
-    range.addEventListener('input', update);
-    update();
+    document.querySelectorAll('.ba').forEach(container => {
+        const range = container.querySelector('.ba__range');
+        if (!range)
+            return;
+        const update = () => {
+            container.style.setProperty('--pos', `${range.value}%`);
+        };
+        range.addEventListener('input', update);
+        update();
+    });
 }
 /* ================================================
    6. GALLERY SCROLL CONTROLS
