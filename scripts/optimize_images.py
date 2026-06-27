@@ -26,8 +26,6 @@ PHOTOS = [
     ("assets/pool-construction.png",        "construction", [960, 640],        False),
     ("assets/renovation.png",               "reno-karoo",   [960, 640],        False),
     ("assets/renovations-pool.png",         "reno-cape",    [960, 640],        False),
-    ("assets/bantu-pools.png",              "gallery-sq1",  [960, 640],        True),
-    ("assets/bantu-pools-flyer.png",        "gallery-sq2",  [960, 640],        True),
 ]
 
 QUALITY = 80
