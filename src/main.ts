@@ -202,18 +202,17 @@ function initServiceTabs(): void {
    ================================================ */
 
 function initBeforeAfter(): void {
-  const container: HTMLElement | null = document.getElementById('beforeAfter');
-  if (!container) return;
+  document.querySelectorAll<HTMLElement>('.ba').forEach((container) => {
+    const range: HTMLInputElement | null = container.querySelector('.ba__range');
+    if (!range) return;
 
-  const range: HTMLInputElement | null = container.querySelector('.ba__range');
-  if (!range) return;
+    const update = (): void => {
+      container.style.setProperty('--pos', `${range.value}%`);
+    };
 
-  const update = (): void => {
-    container.style.setProperty('--pos', `${range.value}%`);
-  };
-
-  range.addEventListener('input', update);
-  update();
+    range.addEventListener('input', update);
+    update();
+  });
 }
 
 /* ================================================
