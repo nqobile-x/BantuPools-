@@ -18,14 +18,25 @@ os.makedirs(OUT, exist_ok=True)
 # (source, output basename, widths, crop_16_9)
 # crop_16_9=True: center-crop to 16:9 before resizing (for square/portrait sources)
 PHOTOS = [
-    ("assets/reno-pool.png",                "pool-after",   [1920, 1280, 800], False),
-    ("assets/dirty-pool.png",               "pool-before",  [1280, 800],       False),
-    ("assets/bantu-pools-pool-clean.png",   "cleaning",     [960, 640],        False),
-    ("assets/scrub-clean.png",              "scrub",        [960, 640],        False),
-    ("assets/repairs-and-maintainance.png", "repairs",      [960, 640],        False),
-    ("assets/pool-construction.png",        "construction", [960, 640],        False),
-    ("assets/renovation.png",               "reno-karoo",   [960, 640],        False),
-    ("assets/renovations-pool.png",         "reno-cape",    [960, 640],        False),
+    # Hero + after-slider (same output, used in both places)
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740.jpeg",      "pool-after",   [1920, 1280, 800], False),
+    # Before-slider (same property as after, matched pair)
+    ("Images/Neglected_residential_swimming_pool_with_202606241748 (1).jpeg", "pool-before",  [1280, 800],       False),
+    # Cleaning bento card + gallery
+    ("Images/Same_residential_swimming_pool_now_202606241751.jpeg",           "cleaning",     [960, 640],        False),
+    # Repairs bento card + gallery + services panel
+    ("Images/Close-up_of_a_professional_pool_202606241753 (1).jpeg",          "repairs",      [960, 640],        False),
+    # Weekly service gallery + services cleaning panel
+    ("Images/Close-up_of_a_professional_pool_202606241753 (2).jpeg",          "scrub",        [960, 640],        False),
+    # Construction/resurfacing (no AI replacement available)
+    ("assets/pool-construction.png",                                           "construction", [960, 640],        False),
+    # Luxury renovation reveal gallery card
+    ("Images/Luxury_pool_renovation_reveal,_newly_202606241755.jpeg",         "reno-karoo",   [960, 640],        False),
+    # Renovation services panel + gallery card
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (1).jpeg",  "reno-cape",    [960, 640],        False),
+    # Additional gallery cards
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (2).jpeg",  "pool-luxury",  [960, 640],        False),
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (3).jpeg",  "pool-golden",  [960, 640],        False),
 ]
 
 QUALITY = 80
@@ -59,7 +70,7 @@ def export_photos() -> None:
 
 
 def export_og_image() -> None:
-    hero = Image.open(os.path.join(ROOT, "assets/reno-pool.png")).convert("RGB")
+    hero = Image.open(os.path.join(ROOT, "Images/Stunning_crystal-clear_swimming_pool_in_202606241740.jpeg")).convert("RGB")
     og = center_crop_16_9(hero)
     og = og.resize((1200, 630), Image.LANCZOS)
     dest = os.path.join(OUT, "og-image.jpg")
