@@ -35,8 +35,17 @@ PHOTOS = [
     # Renovation services panel + gallery card
     ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (1).jpeg",  "reno-cape",    [960, 640],        False),
     # Additional gallery cards
-    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (2).jpeg",  "pool-luxury",  [960, 640],        False),
-    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (3).jpeg",  "pool-golden",  [960, 640],        False),
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (2).jpeg",  "pool-luxury",   [960, 640],            False),
+    ("Images/Stunning_crystal-clear_swimming_pool_in_202606241740 (3).jpeg",  "pool-golden",   [960, 640],            False),
+    # Matched-pair after image for the main slider (same property as pool-before)
+    ("Images/Same_residential_swimming_pool_now_202606241752.jpeg",           "pool-clean",    [1280, 960, 800, 640], False),
+    # Extra before/after pairs for the rescue grid
+    ("Images/Neglected_residential_swimming_pool_with_202606241747.jpeg",     "rescue-b1",     [960, 640],            False),
+    ("Images/Neglected_residential_swimming_pool_with_202606241747 (1).jpeg", "rescue-b2",     [960, 640],            False),
+    ("Images/Neglected_residential_swimming_pool_with_202606241748.jpeg",     "rescue-b3",     [960, 640],            False),
+    ("Images/Same_residential_swimming_pool_now_202606241752 (1).jpeg",       "rescue-a1",     [960, 640],            False),
+    # Third close-up repair shot for gallery
+    ("Images/Close-up_of_a_professional_pool_202606241753.jpeg",              "repair-detail", [960, 640],            False),
 ]
 
 QUALITY = 80
