@@ -48,12 +48,45 @@
       "addressLocality": "Johannesburg",
       "addressCountry": "ZA"
     },
-    "serviceArea": {
-      "@type": "Place",
-      "name": "Johannesburg & surrounds, South Africa"
-    },
+    "priceRange": "$$",
+    "areaServed": [
+      { "@type": "City", "name": "Johannesburg" },
+      { "@type": "Place", "name": "Sandton" },
+      { "@type": "Place", "name": "Randburg" },
+      { "@type": "Place", "name": "Fourways" },
+      { "@type": "Place", "name": "Midrand" },
+      { "@type": "Place", "name": "Roodepoort" },
+      { "@type": "Place", "name": "Bryanston" },
+      { "@type": "Place", "name": "Soweto" }
+    ],
     "sameAs": [
       "https://wa.me/27836883238"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "reviewCount": "3"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Thabo M." },
+        "reviewBody": "My pool was green for two years. Bantu Pools had it crystal clear in under a week — and it's stayed that way ever since."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Sarah J." },
+        "reviewBody": "Best service in the area. The team is professional, punctual and incredibly thorough — my pool has never looked better."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+        "author": { "@type": "Person", "name": "Priya N." },
+        "reviewBody": "They renovated our 20-year-old pool and it looks brand new. On budget, on time, and the quality is outstanding."
+      }
     ],
     "openingHoursSpecification": [
       {
@@ -94,7 +127,7 @@
         "name": "Which areas do you service?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We're based in Johannesburg and service the city and surrounding areas. Message us with your location and we'll confirm availability in your area right away."
+          "text": "We're based in Johannesburg and service Sandton, Randburg, Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area. Message us with your location and we'll confirm availability right away."
         }
       },
       {
@@ -242,22 +275,22 @@
         <dl class="hero__stats reveal d4">
           <div class="stat">
             <dt class="stat__label sr-only">Pools serviced</dt>
-            <dd class="stat__num" data-count="500" data-suffix="+">0+</dd>
+            <dd class="stat__num" data-count="500" data-suffix="+">500+</dd>
             <dd class="stat__label" aria-hidden="true">Pools serviced</dd>
           </div>
           <div class="stat">
             <dt class="stat__label sr-only">Years of experience</dt>
-            <dd class="stat__num" data-count="15" data-suffix="+">0+</dd>
+            <dd class="stat__num" data-count="15" data-suffix="+">15+</dd>
             <dd class="stat__label" aria-hidden="true">Years experience</dd>
           </div>
           <div class="stat">
             <dt class="stat__label sr-only">Satisfaction rate</dt>
-            <dd class="stat__num" data-count="100" data-suffix="%">0%</dd>
+            <dd class="stat__num" data-count="100" data-suffix="%">100%</dd>
             <dd class="stat__label" aria-hidden="true">Satisfaction rate</dd>
           </div>
           <div class="stat">
             <dt class="stat__label sr-only">Emergency support</dt>
-            <dd class="stat__num" data-count="24" data-suffix="/7">0/7</dd>
+            <dd class="stat__num" data-count="24" data-suffix="/7">24/7</dd>
             <dd class="stat__label" aria-hidden="true">Emergency support</dd>
           </div>
         </dl>
@@ -598,6 +631,25 @@
       </div>
     </section>
 
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow reveal">About us</p>
+          <h2 class="section-title reveal d1">Who is Bantu Pools?</h2>
+          <p class="section-sub reveal d2">
+            Bantu Pools is a licensed and insured swimming pool service company based in Johannesburg,
+            South Africa, with over 15 years of experience and more than 500 pools serviced. We provide
+            weekly pool cleaning and chemical balancing, equipment repairs (pumps, filters, heaters and
+            leak detection), and complete pool renovations and resurfacing across Sandton, Randburg,
+            Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area. Quotes
+            are free via WhatsApp on +27&nbsp;83&nbsp;688&nbsp;3238, usually answered the same day, and
+            emergency call-outs are available 24/7.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== TESTIMONIALS ===== -->
     <section class="section" id="reviews">
       <div class="container">
@@ -699,8 +751,7 @@
           <details class="faq__item reveal d2">
             <summary class="faq__q">Which areas do you service?</summary>
             <p class="faq__a">
-              We're based in Johannesburg and service the city and surrounding areas. Message us with your
-              location and we'll confirm availability in your area right away.
+              We're based in Johannesburg and service Sandton, Randburg, Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area. Message us with your location and we'll confirm availability right away.
             </p>
           </details>
 
@@ -811,7 +862,7 @@
             </span>
             <span class="footer__link">
               <svg class="icon" aria-hidden="true"><use href="#i-map-pin"/></svg>
-              Johannesburg &amp; surrounds
+              Sandton, Randburg, Fourways, Midrand, Roodepoort, Bryanston, Soweto &amp; greater Johannesburg
             </span>
           </div>
         </div>
