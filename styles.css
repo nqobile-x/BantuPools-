@@ -15,7 +15,7 @@
   --line: oklch(90.5% 0.013 240);
   --text: oklch(26% 0.032 252);
   --text-2: oklch(46% 0.026 250);
-  --text-3: oklch(62% 0.02 248);
+  --text-3: oklch(51% 0.024 249);
 
   /* Semantic surface/heading tokens (themeable) */
   --surface: #fff;
@@ -29,10 +29,10 @@
   --aqua: oklch(84% 0.1 213);
   --cyan: oklch(72% 0.125 222);
   --gold: oklch(80% 0.13 80);
-  --whatsapp: oklch(70% 0.18 152);
+  --whatsapp: oklch(55% 0.145 152);
 
   --grad-water: linear-gradient(100deg, var(--aqua), var(--cyan) 55%, oklch(68% 0.14 245));
-  --grad-cta: linear-gradient(135deg, var(--azure), var(--azure-deep));
+  --grad-cta: linear-gradient(135deg, oklch(53% 0.15 248), var(--azure-deep));
 
   /* Type */
   --font-display: 'Bricolage Grotesque', 'Manrope', sans-serif;
