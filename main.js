@@ -179,22 +179,21 @@ function initBeforeAfter() {
     });
 }
 /* ================================================
-   7. SCROLL STORY — native scroll progress, motion-safe
+   7. SCROLL STORY — scroll-scrubbed video, motion-safe
    ================================================ */
 function initPoolStory() {
     const story = document.querySelector('.pool-story');
-    const canvas = story?.querySelector('canvas');
+    const video = story?.querySelector('video');
     const controls = story?.querySelector('.pool-story__controls');
     const slider = document.querySelector('#storyScrubber');
     const mode = document.querySelector('#storyScrollMode');
     const stage = document.getElementById('storyStage');
-    const context = canvas?.getContext('2d', { alpha: false });
-    if (!story || !canvas || !context || !controls || !slider || !mode || !stage)
+    if (!story || !video || !controls || !slider || !mode || !stage)
         return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const shortScreen = window.matchMedia('(max-height: 640px)');
     const labels = ['01 / A fresh start', '02 / Restore the finish', '03 / Bring back the blue', '04 / Enjoy the evening'];
-    let frames = [];
+    let duration = 0;
     let progress = 0;
     let paused = false;
     let tick = 0;
@@ -205,36 +204,24 @@ function initPoolStory() {
         mode.setAttribute('aria-pressed', String(paused));
     };
     const draw = () => {
-        if (!frames.length)
+        if (!duration)
             return;
-        const position = progress * (frames.length - 1);
-        const index = Math.min(frames.length - 1, Math.floor(position));
-        const paint = (frame, opacity) => {
-            const scale = Math.max(canvas.width / frame.naturalWidth, canvas.height / frame.naturalHeight);
-            const width = frame.naturalWidth * scale;
-            const height = frame.naturalHeight * scale;
-            context.globalAlpha = opacity;
-            context.drawImage(frame, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
-        };
-        paint(frames[index], 1);
-        const blend = position - index;
-        // Ease into and out of each photographic stage without abrupt boundaries.
-        if (index < frames.length - 1)
-            paint(frames[index + 1], blend * blend * (3 - 2 * blend));
-        context.globalAlpha = 1;
-        const label = labels[Math.round(position)];
+        const time = Math.min(duration - 0.04, progress * duration);
+        if (Math.abs(video.currentTime - time) > 0.008)
+            video.currentTime = time;
+        const label = labels[Math.round(progress * (labels.length - 1))];
         stage.textContent = label;
         slider.value = String(Math.round(progress * 120));
         slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent — ${label.slice(5)}`);
-        canvas.dataset.frame = slider.value;
+        video.dataset.frame = slider.value;
     };
     const update = (now) => {
         tick = 0;
-        if (!frames.length)
+        if (!duration)
             return;
         let settling = false;
         if (!paused && !reduced.matches && !shortScreen.matches) {
-            const distance = Math.max(1, story.offsetHeight - canvas.clientHeight);
+            const distance = Math.max(1, story.offsetHeight - video.clientHeight);
             const target = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
             const elapsed = lastTime ? Math.min(64, now - lastTime) : 16.67;
             // Time-based damping feels consistent on 60 Hz and high-refresh screens.
@@ -250,13 +237,6 @@ function initPoolStory() {
     };
     const request = () => { if (!tick)
         tick = requestAnimationFrame(update); };
-    const resize = () => {
-        const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
-        canvas.width = Math.round(canvas.clientWidth * ratio);
-        canvas.height = Math.round(canvas.clientHeight * ratio);
-        syncMode();
-        request();
-    };
     slider.addEventListener('input', () => {
         paused = true;
         if (tick)
@@ -269,29 +249,35 @@ function initPoolStory() {
     });
     mode.addEventListener('click', () => { paused = !paused; syncMode(); request(); });
     const load = async () => {
-        const width = window.innerWidth <= 680 ? 960 : 1600;
+        const size = window.innerWidth <= 680 ? 'mobile' : 'desktop';
         try {
-            frames = await Promise.all(['before', 'restore', 'clear', 'dusk'].map(async (name) => {
-                const frame = new Image();
-                frame.src = `assets/img/sequence-${name}-${width}.webp`;
-                await frame.decode();
-                return frame;
-            }));
-            canvas.hidden = false;
+            await new Promise((resolve, reject) => {
+                video.addEventListener('loadeddata', () => resolve(), { once: true });
+                video.addEventListener('error', () => reject(new Error('video failed')), { once: true });
+                video.src = `assets/video/pool-story-${size}.mp4`;
+                video.load();
+                // iOS only decodes a first frame once playback has been attempted.
+                video.play().then(() => video.pause()).catch(() => undefined);
+            });
+            video.pause();
+            duration = video.duration;
+            video.hidden = false;
             controls.hidden = false;
             story.classList.add('pool-story--ready');
             if (reduced.matches || shortScreen.matches)
                 progress = 1;
-            resize();
+            draw();
+            request();
             window.addEventListener('scroll', request, { passive: true });
-            window.addEventListener('resize', resize, { passive: true });
+            window.addEventListener('resize', request, { passive: true });
             reduced.addEventListener('change', () => { if (reduced.matches)
-                progress = 1; resize(); });
-            shortScreen.addEventListener('change', resize);
+                progress = 1; syncMode(); request(); });
+            shortScreen.addEventListener('change', () => { syncMode(); request(); });
+            syncMode();
         }
         catch {
-            // Keep the complete static image and copy when a frame cannot load.
-            frames = [];
+            // Keep the complete static image and copy when the video cannot load.
+            duration = 0;
         }
     };
     if ('IntersectionObserver' in window) {
