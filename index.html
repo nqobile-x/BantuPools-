@@ -170,7 +170,7 @@
   <!-- Theme bootstrap: applies saved/system theme before paint (no flash) -->
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js?v=pool-sequence-1" defer></script>
+  <script src="main.js?v=pool-sequence-2" defer></script>
 </head>
 <body>
 
@@ -511,10 +511,9 @@
         </div>
         <div class="pool-story__controls" hidden>
           <div class="pool-story__stage"><span id="storyStage">01 / Before</span><span>Scroll or drag to explore</span></div>
-          <input id="storyScrubber" type="range" min="0" max="120" value="0" step="1" aria-label="Explore the pool transformation" aria-describedby="storyDisclosure">
-          <div class="pool-story__control-footer"><small id="storyDisclosure">AI-generated concept · Illustrative restoration stages</small><button id="storyScrollMode" type="button">Pause scroll animation</button></div>
+          <input id="storyScrubber" type="range" min="0" max="120" value="0" step="1" aria-label="Explore the pool transformation">
+          <div class="pool-story__control-footer"><button id="storyScrollMode" type="button">Pause scroll animation</button></div>
         </div>
-        <p class="pool-story__fallback-note">AI-generated pool concept</p>
       </div>
     </section>
 
@@ -595,87 +594,78 @@
           <p class="section-sub reveal d2">Swipe through real work — no stock-photo promises.</p>
         </div>
 
-        <div class="gallery reveal">
-          <div class="gallery__track" id="galleryTrack" tabindex="0" aria-label="Project gallery, scroll horizontally">
-            <figure class="gallery__card">
-              <img src="assets/img/reno-cape-960.webp" srcset="assets/img/reno-cape-640.webp 640w, assets/img/reno-cape-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Luxury swimming pool with crystal-clear blue water, palm trees and mountain views on a bright South African day" width="960" height="536" loading="lazy" decoding="async">
+        <div class="gallery">
+          <div class="gallery__track" id="galleryTrack" aria-label="Project gallery">
+            <figure class="gallery__card reveal">
+              <img src="assets/img/reno-cape-960.webp" srcset="assets/img/reno-cape-640.webp 640w, assets/img/reno-cape-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Luxury swimming pool with crystal-clear blue water, palm trees and mountain views on a bright South African day" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Luxury renovation</strong>
                 <span>Full transformation</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/reno-karoo-960.webp" srcset="assets/img/reno-karoo-640.webp 640w, assets/img/reno-karoo-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Night-time luxury pool renovation reveal — geometric pool with blue LED lighting, fire pit and Johannesburg city skyline" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d1">
+              <img src="assets/img/reno-karoo-960.webp" srcset="assets/img/reno-karoo-640.webp 640w, assets/img/reno-karoo-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Night-time luxury pool renovation reveal — geometric pool with blue LED lighting, fire pit and Johannesburg city skyline" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Renovation reveal</strong>
                 <span>Johannesburg luxury</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/repairs-960.webp" srcset="assets/img/repairs-640.webp 640w, assets/img/repairs-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Pool technician in blue gloves grouting and repairing cracked tiles at the pool waterline" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d2">
+              <img src="assets/img/repairs-960.webp" srcset="assets/img/repairs-640.webp 640w, assets/img/repairs-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Pool technician in blue gloves grouting and repairing cracked tiles at the pool waterline" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Tile repairs</strong>
                 <span>Repairs &amp; maintenance</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/scrub-960.webp" srcset="assets/img/scrub-640.webp 640w, assets/img/scrub-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Pool technician in black gloves applying sealant to cracked pool coping tiles with crystal-clear water visible" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal">
+              <img src="assets/img/scrub-960.webp" srcset="assets/img/scrub-640.webp 640w, assets/img/scrub-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Pool technician in black gloves applying sealant to cracked pool coping tiles with crystal-clear water visible" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Coping repair</strong>
                 <span>Full service visit</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/construction-960.webp" srcset="assets/img/construction-640.webp 640w, assets/img/construction-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Two workers chipping and resurfacing the interior shell of an empty pool, with new tiles stacked on the coping" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d1">
+              <img src="assets/img/construction-960.webp" srcset="assets/img/construction-640.webp 640w, assets/img/construction-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Two workers chipping and resurfacing the interior shell of an empty pool, with new tiles stacked on the coping" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Resurfacing</strong>
                 <span>In progress</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/cleaning-960.webp" srcset="assets/img/cleaning-640.webp 640w, assets/img/cleaning-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Bantu Pools technician testing water chemistry beside a perfectly restored turquoise pool in a neat residential garden" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d2">
+              <img src="assets/img/cleaning-960.webp" srcset="assets/img/cleaning-640.webp 640w, assets/img/cleaning-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Bantu Pools technician testing water chemistry beside a perfectly restored turquoise pool in a neat residential garden" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Green-to-clean</strong>
                 <span>Chemical restore</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/pool-luxury-960.webp" srcset="assets/img/pool-luxury-640.webp 640w, assets/img/pool-luxury-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Crystal-clear luxury pool with natural stone coping, lush tropical garden and panoramic mountain views" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal">
+              <img src="assets/img/pool-luxury-960.webp" srcset="assets/img/pool-luxury-640.webp 640w, assets/img/pool-luxury-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Crystal-clear luxury pool with natural stone coping, lush tropical garden and panoramic mountain views" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Crystal clear</strong>
                 <span>Weekly maintenance</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/pool-golden-960.webp" srcset="assets/img/pool-golden-640.webp 640w, assets/img/pool-golden-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Golden-hour swimming pool with agapanthus and palm trees, warm sunset light reflecting across the water" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d1">
+              <img src="assets/img/pool-golden-960.webp" srcset="assets/img/pool-golden-640.webp 640w, assets/img/pool-golden-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Golden-hour swimming pool with agapanthus and palm trees, warm sunset light reflecting across the water" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Golden hour</strong>
                 <span>Pool maintenance</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/rescue-b3-960.webp" srcset="assets/img/rescue-b3-640.webp 640w, assets/img/rescue-b3-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Severely neglected pool with broken cover, heavy debris and algae-green water, awaiting a Bantu Pools rescue" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal d2">
+              <img src="assets/img/rescue-b3-960.webp" srcset="assets/img/rescue-b3-640.webp 640w, assets/img/rescue-b3-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Severely neglected pool with broken cover, heavy debris and algae-green water, awaiting a Bantu Pools rescue" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Before we arrived</strong>
                 <span>Green pool rescue</span>
               </figcaption>
             </figure>
-            <figure class="gallery__card">
-              <img src="assets/img/repair-detail-960.webp" srcset="assets/img/repair-detail-640.webp 640w, assets/img/repair-detail-960.webp 960w" sizes="(max-width: 820px) 80vw, 460px" alt="Close-up of pool technician in navy uniform repairing pool tile at the waterline edge" width="960" height="536" loading="lazy" decoding="async">
+            <figure class="gallery__card reveal">
+              <img src="assets/img/repair-detail-960.webp" srcset="assets/img/repair-detail-640.webp 640w, assets/img/repair-detail-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Close-up of pool technician in navy uniform repairing pool tile at the waterline edge" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
                 <strong>Expert repairs</strong>
                 <span>Tile &amp; waterline</span>
               </figcaption>
             </figure>
-          </div>
-
-          <div class="gallery__nav">
-            <button class="gallery__btn" id="galleryPrev" type="button" aria-label="Scroll gallery backwards">
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg>
-            </button>
-            <button class="gallery__btn" id="galleryNext" type="button" aria-label="Scroll gallery forwards">
-              <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>
-            </button>
           </div>
         </div>
       </div>
