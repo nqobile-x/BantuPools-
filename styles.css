@@ -1160,29 +1160,32 @@ p {
   font-size: 0.95rem;
 }
 
-/* ---------- Gallery (scroll-snap) ---------- */
+/* ---------- Gallery (vertical grid) ---------- */
 .gallery {
   position: relative;
 }
 
 .gallery__track {
   display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: clamp(260px, 38vw, 460px);
-  gap: clamp(1rem, 2vw, 1.5rem);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-block: 0.5rem 1.5rem;
-  scrollbar-width: none;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+  padding-block: 0.5rem 0;
 }
 
-.gallery__track::-webkit-scrollbar {
-  display: none;
+@media (min-width: 900px) {
+  .gallery__track {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery__track {
+    grid-template-columns: 1fr;
+  }
 }
 
 .gallery__card {
   position: relative;
-  scroll-snap-align: start;
   border-radius: var(--r-lg);
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -1228,32 +1231,6 @@ p {
   font-size: var(--fs-xs);
   color: oklch(90% 0.01 230 / 0.7);
   white-space: nowrap;
-}
-
-.gallery__nav {
-  display: flex;
-  gap: 0.6rem;
-  justify-content: flex-end;
-  margin-top: 0.25rem;
-}
-
-.gallery__btn {
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 1.5px solid var(--line);
-  color: var(--heading);
-  background: var(--surface);
-  transition: background-color var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
-}
-
-.gallery__btn:hover {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
-  transform: translateY(-2px);
 }
 
 .gallery__btn .icon {

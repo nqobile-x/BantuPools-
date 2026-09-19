@@ -179,22 +179,6 @@ function initBeforeAfter() {
     });
 }
 /* ================================================
-   6. GALLERY SCROLL CONTROLS
-   ================================================ */
-function initGallery() {
-    const track = document.getElementById('galleryTrack');
-    const prev = document.getElementById('galleryPrev');
-    const next = document.getElementById('galleryNext');
-    if (!track || !prev || !next)
-        return;
-    const step = () => {
-        const card = track.querySelector('.gallery__card');
-        return card ? card.offsetWidth + 24 : 360;
-    };
-    prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
-    next.addEventListener('click', () => track.scrollBy({ left: step(), behavior: 'smooth' }));
-}
-/* ================================================
    7. SCROLL STORY — native scroll progress, motion-safe
    ================================================ */
 function initPoolStory() {
@@ -417,7 +401,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initStatCounters();
     initServiceTabs();
     initBeforeAfter();
-    initGallery();
     initPoolStory();
     initQuoteBuilder();
     initYear();
