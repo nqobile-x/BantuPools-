@@ -59,7 +59,7 @@ function initReveals() {
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
     elements.forEach((el) => observer.observe(el));
 }
 /* ================================================
@@ -214,6 +214,7 @@ function initPoolStory() {
     let progress = 0;
     let paused = false;
     let tick = 0;
+    let lastTime = 0;
     const syncMode = () => {
         mode.hidden = reduced.matches || shortScreen.matches;
         mode.textContent = paused ? 'Resume scroll animation' : 'Pause scroll animation';
@@ -232,8 +233,10 @@ function initPoolStory() {
             context.drawImage(frame, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
         };
         paint(frames[index], 1);
+        const blend = position - index;
+        // Ease into and out of each photographic stage without abrupt boundaries.
         if (index < frames.length - 1)
-            paint(frames[index + 1], position - index);
+            paint(frames[index + 1], blend * blend * (3 - 2 * blend));
         context.globalAlpha = 1;
         const label = labels[Math.round(position)];
         stage.textContent = label;
@@ -241,16 +244,25 @@ function initPoolStory() {
         slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent — ${label.slice(5)}`);
         canvas.dataset.frame = slider.value;
     };
-    const update = () => {
+    const update = (now) => {
         tick = 0;
         if (!frames.length)
             return;
+        let settling = false;
         if (!paused && !reduced.matches && !shortScreen.matches) {
             const distance = Math.max(1, story.offsetHeight - canvas.clientHeight);
-            progress = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
-            progress = Math.round(progress * 120) / 120;
+            const target = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
+            const elapsed = lastTime ? Math.min(64, now - lastTime) : 16.67;
+            // Time-based damping feels consistent on 60 Hz and high-refresh screens.
+            progress += (target - progress) * (1 - Math.exp(-elapsed / 110));
+            settling = Math.abs(target - progress) > .0001;
+            if (!settling)
+                progress = target;
         }
         draw();
+        lastTime = settling ? now : 0;
+        if (settling)
+            tick = requestAnimationFrame(update);
     };
     const request = () => { if (!tick)
         tick = requestAnimationFrame(update); };
@@ -263,6 +275,10 @@ function initPoolStory() {
     };
     slider.addEventListener('input', () => {
         paused = true;
+        if (tick)
+            cancelAnimationFrame(tick);
+        tick = 0;
+        lastTime = 0;
         progress = Number(slider.value) / 120;
         syncMode();
         draw();
