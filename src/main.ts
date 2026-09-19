@@ -271,7 +271,7 @@ function initPoolStory(): void {
       const target = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
       const elapsed = lastTime ? Math.min(64, now - lastTime) : 16.67;
       // Time-based damping feels consistent on 60 Hz and high-refresh screens.
-      progress += (target - progress) * (1 - Math.exp(-elapsed / 110));
+      progress += (target - progress) * (1 - Math.exp(-elapsed / (smoothScrollActive ? 45 : 110)));
       settling = Math.abs(target - progress) > .0001;
       if (!settling) progress = target;
     }
@@ -421,10 +421,40 @@ function initPrivacyGuard(): void {
 }
 
 /* ================================================
+   SMOOTH SCROLL — Lenis (vendor/lenis.min.js)
+   ================================================ */
+
+interface LenisInstance { raf(time: number): void; }
+declare const Lenis: (new (options: Record<string, unknown>) => LenisInstance) | undefined;
+
+let smoothScrollActive = false;
+
+function initSmoothScroll(): void {
+  if (typeof Lenis === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const lenis = new Lenis({
+    duration: 1.15,
+    easing: (t: number): number => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    anchors: true,
+  });
+  smoothScrollActive = true;
+  document.documentElement.classList.add('lenis-active');
+
+  const raf = (time: number): void => {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  };
+  requestAnimationFrame(raf);
+}
+
+/* ================================================
    INITIALISE ON DOM READY
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', (): void => {
+  initSmoothScroll();
   initPrivacyGuard();
   initNav();
   initReveals();
