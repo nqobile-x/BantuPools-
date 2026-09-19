@@ -59,6 +59,7 @@
       { "@type": "Place", "name": "Bryanston" },
       { "@type": "Place", "name": "Soweto" }
     ],
+    "knowsAbout": ["pool cleaning", "pool repairs", "pool renovations", "green pool treatment", "pool pump repair"],
     "sameAs": [
       "https://wa.me/27836883238"
     ],
@@ -169,7 +170,7 @@
   <!-- Theme bootstrap: applies saved/system theme before paint (no flash) -->
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
-  <script src="main.js" defer></script>
+  <script src="main.js?v=pool-sequence-1" defer></script>
 </head>
 <body>
 
@@ -451,7 +452,7 @@
       <div class="container">
         <div class="section-head section-head--center">
           <p class="eyebrow reveal">More rescues</p>
-          <h2 class="section-title reveal d1">We've seen it all.</h2>
+          <h2 class="section-title reveal d1">We’ve seen it all.</h2>
           <p class="section-sub reveal d2">Drag each slider — every one of these is a real green-to-clean rescue.</p>
         </div>
 
@@ -490,6 +491,55 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- ===== SCROLL STORY / LOCAL SERVICE ===== -->
+    <section class="pool-story" id="johannesburg-pool-care" aria-labelledby="pool-story-title">
+      <div class="pool-story__sticky">
+        <img class="pool-story__image" src="assets/img/johannesburg-pool-dusk-1600.webp" srcset="assets/img/johannesburg-pool-dusk-960.webp 960w, assets/img/johannesburg-pool-dusk-1600.webp 1600w" sizes="100vw" alt="A clear, illuminated residential swimming pool being cared for at dusk in Johannesburg" width="1672" height="942" loading="lazy" decoding="async">
+        <div class="pool-story__veil"></div>
+        <canvas class="pool-story__canvas" aria-hidden="true" hidden></canvas>
+        <div class="container pool-story__content">
+          <p class="eyebrow pool-story__eyebrow">Johannesburg pool care</p>
+          <h2 id="pool-story-title" class="pool-story__title">Same garden.<br><span>A whole new feeling.</span></h2>
+          <p class="pool-story__copy">Imagine the possibilities. Scroll from tired water to a fresh finish, clear blue days and evenings worth staying home for.</p>
+          <div class="pool-story__locations" aria-label="Core service areas">
+            <span>Johannesburg</span><span>Sandton</span><span>Randburg</span><span>Roodepoort</span><span>Midrand</span>
+          </div>
+          <a class="btn btn--primary" href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20for%20my%20pool." target="_blank" rel="noopener noreferrer">Check my area <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+        <div class="pool-story__controls" hidden>
+          <div class="pool-story__stage"><span id="storyStage">01 / Before</span><span>Scroll or drag to explore</span></div>
+          <input id="storyScrubber" type="range" min="0" max="120" value="0" step="1" aria-label="Explore the pool transformation" aria-describedby="storyDisclosure">
+          <div class="pool-story__control-footer"><small id="storyDisclosure">AI-generated concept · Illustrative restoration stages</small><button id="storyScrollMode" type="button">Pause scroll animation</button></div>
+        </div>
+        <p class="pool-story__fallback-note">AI-generated pool concept</p>
+      </div>
+    </section>
+
+    <!-- ===== QUICK QUOTE ===== -->
+    <section class="section quote-builder" id="quick-quote" aria-labelledby="quote-builder-title">
+      <div class="container quote-builder__grid">
+        <div class="quote-builder__intro reveal">
+          <p class="eyebrow">A faster way to start</p>
+          <h2 id="quote-builder-title" class="section-title">Tell us what the pool needs.</h2>
+          <p class="section-sub">Choose a service and your area. We’ll open WhatsApp with a useful, ready-to-send message — no forms disappearing into a black hole.</p>
+          <p class="quote-builder__micro">Free quotes · Photo-first assessment · Johannesburg & surrounds</p>
+        </div>
+        <form class="quote-builder__form reveal d1" id="quoteBuilder">
+          <label for="quoteService">I need help with</label>
+          <select id="quoteService" name="service" required>
+            <option value="Pool cleaning / weekly maintenance">Pool cleaning or weekly maintenance</option>
+            <option value="Green pool rescue">A green pool rescue</option>
+            <option value="Pump, filter or equipment repair">A pump, filter or equipment repair</option>
+            <option value="Pool renovation or resurfacing">A renovation or resurfacing</option>
+            <option value="New pool construction">A new pool</option>
+          </select>
+          <label for="quoteArea">My suburb / area</label>
+          <input id="quoteArea" name="area" type="text" autocomplete="address-level2" placeholder="e.g. Fourways" required>
+          <button class="btn btn--primary btn--lg" type="submit">Start my free quote <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+        </form>
       </div>
     </section>
 

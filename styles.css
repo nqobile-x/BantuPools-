@@ -1055,6 +1055,62 @@ p {
   color: oklch(85% 0.015 240 / 0.7);
 }
 
+/* ---------- Scroll story: progressive, never scroll-jacked ---------- */
+.pool-story {
+  height: auto;
+  background: var(--ink);
+}
+.pool-story--ready { height: 260svh; }
+
+.pool-story__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  min-height: 38rem;
+  overflow: hidden;
+  display: grid;
+  align-items: center;
+  isolation: isolate;
+}
+
+.pool-story__image, .pool-story__veil { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pool-story__image { object-fit: cover; object-position: center; z-index: -2; }
+.pool-story__canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
+.pool-story--ready .pool-story__image { visibility: hidden; }
+.pool-story__veil { background: linear-gradient(90deg, oklch(13% .03 250 / .88) 0%, oklch(13% .03 250 / .62) 42%, transparent 75%), linear-gradient(0deg, oklch(13% .03 250 / .55), transparent 45%); z-index: -1; }
+.pool-story__content { color: #fff; width: min(100% - 3rem, 1160px); max-width: 1160px; padding: 5rem 0 9rem; }
+.pool-story__eyebrow { color: oklch(83% .12 210); }
+.pool-story__title { max-width: 42rem; font-size: clamp(2.8rem, 5.7vw, 5.5rem); letter-spacing: -.055em; line-height: .98; margin: .75rem 0 1.25rem; }
+.pool-story__title span { color: oklch(82% .13 205); }
+.pool-story__copy { max-width: 35rem; color: oklch(96% .01 240 / .82); font-size: clamp(1rem, 1.5vw, 1.15rem); line-height: 1.7; }
+.pool-story__locations { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.8rem 0 2rem; }
+.pool-story__locations span { padding: .4rem .75rem; border: 1px solid oklch(100% 0 0 / .25); border-radius: 999px; background: oklch(100% 0 0 / .1); font-size: .78rem; font-weight: 700; }
+.pool-story__scroll-note { position: absolute; bottom: 1.5rem; right: clamp(1.25rem, 5vw, 4rem); color: oklch(100% 0 0 / .65); font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; writing-mode: vertical-rl; }
+
+.pool-story__controls { position: absolute; bottom: 2rem; left: max(1.5rem, calc((100% - 1160px) / 2)); right: max(6rem, calc((100% - 1160px) / 2)); color: white; }
+.pool-story__stage, .pool-story__control-footer { display: flex; justify-content: space-between; gap: 1rem; align-items: center; font-size: .8rem; }
+.pool-story__stage > :first-child { font-weight: 800; text-transform: uppercase; letter-spacing: .1em; }
+#storyScrubber { width: 100%; min-height: 36px; cursor: ew-resize; accent-color: #77e4ed; }
+.pool-story__control-footer small { color: #e0e7eb; font-size: .72rem; }
+#storyScrollMode { border: 1px solid #ffffff60; border-radius: 99px; padding: .6rem .85rem; background: #102330b3; color: white; cursor: pointer; font: inherit; }
+.pool-story__fallback-note { position: absolute; bottom: 1rem; left: 1.5rem; color: white; font-size: .75rem; }
+.pool-story--ready .pool-story__fallback-note { display: none; }
+@media (max-width: 680px) { .pool-story--ready { height: 190svh; } .pool-story__sticky { min-height: 44rem; } .pool-story__content { padding-top: 5rem; padding-bottom: 15rem; } .pool-story__locations { display: none; } .pool-story__copy { margin-bottom: 1.5rem; } .pool-story__controls { right: 1.5rem; bottom: 6rem; } .pool-story__stage { font-size: .7rem; } .pool-story__control-footer { align-items: flex-start; } .pool-story__control-footer small { max-width: 50%; } }
+@media (prefers-reduced-motion: reduce), (max-height: 640px) { .pool-story, .pool-story--ready { height: auto; } .pool-story__sticky { position: relative; height: auto; min-height: 40rem; } }
+
+/* ---------- Quick quote builder ---------- */
+.quote-builder { overflow: hidden; position: relative; }
+.quote-builder::after { content: ''; position: absolute; inset: 0 0 0 55%; background: linear-gradient(90deg, var(--bg) 0%, oklch(96% .02 220 / .38) 30%, oklch(96% .02 220 / .74)), url('assets/img/johannesburg-pool-morning-1200.webp') center / cover; z-index: -1; opacity: .85; }
+.quote-builder__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .82fr); align-items: center; gap: clamp(2rem, 7vw, 7rem); }
+.quote-builder__intro .section-title { max-width: 31rem; margin-bottom: 1rem; }
+.quote-builder__micro { margin-top: 1.4rem; color: var(--azure); font-size: var(--fs-sm); font-weight: 800; }
+.quote-builder__form { padding: clamp(1.25rem, 3vw, 2.2rem); background: linear-gradient(145deg, oklch(98% .015 225), var(--surface)); border: 1px solid var(--line); border-radius: var(--r-xl); box-shadow: var(--shadow-md); display: grid; gap: .65rem; }
+.quote-builder__form label { font-size: var(--fs-sm); font-weight: 800; color: var(--ink); margin-top: .4rem; }
+.quote-builder__form select, .quote-builder__form input { width: 100%; border: 1px solid var(--line); border-radius: .8rem; background: var(--surface); color: var(--ink); padding: .85rem 1rem; font: inherit; min-height: 3.1rem; }
+.quote-builder__form select:focus, .quote-builder__form input:focus { outline: 3px solid oklch(75% .12 210 / .4); outline-offset: 2px; border-color: var(--azure); }
+.quote-builder__form .btn { margin-top: 1rem; justify-content: center; }
+@media (max-width: 800px) { .quote-builder__grid { grid-template-columns: 1fr; gap: 2rem; } .quote-builder::after { inset: 48% 0 0; background: linear-gradient(0deg, var(--bg), oklch(96% .02 220 / .55)), url('assets/img/johannesburg-pool-morning-720.webp') center / cover; } }
+
 /* ---------- Process Steps ---------- */
 .steps {
   display: grid;

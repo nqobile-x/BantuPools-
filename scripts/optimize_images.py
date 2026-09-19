@@ -46,6 +46,9 @@ PHOTOS = [
     ("Images/Same_residential_swimming_pool_now_202606241752 (1).jpeg",       "rescue-a1",     [960, 640],            False),
     # Third close-up repair shot for gallery
     ("Images/Close-up_of_a_professional_pool_202606241753.jpeg",              "repair-detail", [960, 640],            False),
+    # Scroll-sequence pool story images
+    ("assets/img/johannesburg-pool-dusk.png",    "johannesburg-pool-dusk",    [1600, 960], False),
+    ("assets/img/johannesburg-pool-morning.png", "johannesburg-pool-morning", [1200, 720], False),
 ]
 
 QUALITY = 80
