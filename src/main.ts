@@ -235,6 +235,122 @@ function initGallery(): void {
 }
 
 /* ================================================
+   7. SCROLL STORY — native scroll progress, motion-safe
+   ================================================ */
+function initPoolStory(): void {
+  const story = document.querySelector<HTMLElement>('.pool-story');
+  const canvas = story?.querySelector<HTMLCanvasElement>('canvas');
+  const controls = story?.querySelector<HTMLElement>('.pool-story__controls');
+  const slider = document.querySelector<HTMLInputElement>('#storyScrubber');
+  const mode = document.querySelector<HTMLButtonElement>('#storyScrollMode');
+  const stage = document.getElementById('storyStage');
+  const context = canvas?.getContext('2d', { alpha: false });
+  if (!story || !canvas || !context || !controls || !slider || !mode || !stage) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const shortScreen = window.matchMedia('(max-height: 640px)');
+  const labels = ['01 / A fresh start', '02 / Restore the finish', '03 / Bring back the blue', '04 / Enjoy the evening'];
+  let frames: HTMLImageElement[] = [];
+  let progress = 0;
+  let paused = false;
+  let tick = 0;
+  const syncMode = (): void => {
+    mode.hidden = reduced.matches || shortScreen.matches;
+    mode.textContent = paused ? 'Resume scroll animation' : 'Pause scroll animation';
+    mode.setAttribute('aria-pressed', String(paused));
+  };
+  const draw = (): void => {
+    if (!frames.length) return;
+    const position = progress * (frames.length - 1);
+    const index = Math.min(frames.length - 1, Math.floor(position));
+    const paint = (frame: HTMLImageElement, opacity: number): void => {
+      const scale = Math.max(canvas.width / frame.naturalWidth, canvas.height / frame.naturalHeight);
+      const width = frame.naturalWidth * scale;
+      const height = frame.naturalHeight * scale;
+      context.globalAlpha = opacity;
+      context.drawImage(frame, (canvas.width - width) / 2, (canvas.height - height) / 2, width, height);
+    };
+    paint(frames[index], 1);
+    if (index < frames.length - 1) paint(frames[index + 1], position - index);
+    context.globalAlpha = 1;
+    const label = labels[Math.round(position)];
+    stage.textContent = label;
+    slider.value = String(Math.round(progress * 120));
+    slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent — ${label.slice(5)}`);
+    canvas.dataset.frame = slider.value;
+  };
+  const update = (): void => {
+    tick = 0;
+    if (!frames.length) return;
+    if (!paused && !reduced.matches && !shortScreen.matches) {
+      const distance = Math.max(1, story.offsetHeight - canvas.clientHeight);
+      progress = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
+      progress = Math.round(progress * 120) / 120;
+    }
+    draw();
+  };
+  const request = (): void => { if (!tick) tick = requestAnimationFrame(update); };
+  const resize = (): void => {
+    const ratio = Math.min(window.devicePixelRatio || 1, 1.5);
+    canvas.width = Math.round(canvas.clientWidth * ratio);
+    canvas.height = Math.round(canvas.clientHeight * ratio);
+    syncMode();
+    request();
+  };
+  slider.addEventListener('input', () => {
+    paused = true;
+    progress = Number(slider.value) / 120;
+    syncMode();
+    draw();
+  });
+  mode.addEventListener('click', () => { paused = !paused; syncMode(); request(); });
+  const load = async (): Promise<void> => {
+    const width = window.innerWidth <= 680 ? 960 : 1600;
+    try {
+      frames = await Promise.all(['before', 'restore', 'clear', 'dusk'].map(async (name) => {
+        const frame = new Image();
+        frame.src = `assets/img/sequence-${name}-${width}.webp`;
+        await frame.decode();
+        return frame;
+      }));
+      canvas.hidden = false;
+      controls.hidden = false;
+      story.classList.add('pool-story--ready');
+      if (reduced.matches || shortScreen.matches) progress = 1;
+      resize();
+      window.addEventListener('scroll', request, { passive: true });
+      window.addEventListener('resize', resize, { passive: true });
+      reduced.addEventListener('change', () => { if (reduced.matches) progress = 1; resize(); });
+      shortScreen.addEventListener('change', resize);
+    } catch {
+      // Keep the complete static image and copy when a frame cannot load.
+      frames = [];
+    }
+  };
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) { observer.disconnect(); void load(); }
+    }, { rootMargin: '800px' });
+    observer.observe(story);
+  } else { void load(); }
+}
+
+/* ================================================
+   8. QUICK QUOTE — passes context into WhatsApp
+   ================================================ */
+function initQuoteBuilder(): void {
+  const form = document.getElementById('quoteBuilder') as HTMLFormElement | null;
+  if (!form) return;
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const service = String(data.get('service') ?? 'pool help');
+    const area = String(data.get('area') ?? '').trim();
+    const message = `Hi Bantu Pools, I need help with ${service}. My area is ${area}. I can send a photo for a free quote.`;
+    window.open(`https://wa.me/27836883238?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
+  });
+}
+
+/* ================================================
    7. FOOTER YEAR
    ================================================ */
 
@@ -322,6 +438,8 @@ document.addEventListener('DOMContentLoaded', (): void => {
   initServiceTabs();
   initBeforeAfter();
   initGallery();
+  initPoolStory();
+  initQuoteBuilder();
   initYear();
   initThemeToggle();
 });
