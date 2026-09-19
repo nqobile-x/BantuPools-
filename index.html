@@ -15,6 +15,9 @@
   <meta name="author" content="Bantu Pools">
   <meta name="theme-color" content="#101b29">
   <link rel="canonical" href="https://www.bantupools.co.za/">
+  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable summary of Bantu Pools">
+  <meta name="geo.region" content="ZA-GT">
+  <meta name="geo.placename" content="Johannesburg">
 
   <!-- Google Search Console verification -->
   <meta name="google-site-verification" content="wtlAtqQ_hDA6jbCwbvtO8zfC-z2be1XPfqcOXz-TEBg" />
@@ -38,7 +41,44 @@
   {
     "@context": "https://schema.org",
     "@type": "HomeAndConstructionBusiness",
+    "@id": "https://www.bantupools.co.za/#business",
     "name": "Bantu Pools",
+    "alternateName": "Bantu Pools Johannesburg",
+    "slogan": "We bring pools back to life.",
+    "availableLanguage": ["en-ZA"],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Swimming pool services in Johannesburg",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pool cleaning and weekly maintenance",
+            "serviceType": "Swimming pool cleaning",
+            "description": "Weekly visits covering skimming, vacuuming, basket emptying, waterline tile brushing and chlorine/pH balancing, plus green-to-clean rescues for neglected pools."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pool equipment repairs",
+            "serviceType": "Swimming pool equipment repair",
+            "description": "Pump diagnostics, filter cleaning and sand replacement, gas and electric heater repair, and pressure testing for hidden leaks."
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Pool renovations and resurfacing",
+            "serviceType": "Swimming pool renovation",
+            "description": "Replastering (quartz, pebble, marble plaster), glass and ceramic tiling, LED lighting and coping repair."
+          }
+        }
+      ]
+    },
     "image": "https://www.bantupools.co.za/assets/img/og-image.jpg",
     "logo": "https://www.bantupools.co.za/assets/logo/logo-nav.png",
     "telephone": "+27836883238",
@@ -101,11 +141,44 @@
   }
   </script>
 
+  <!-- WebSite + WebPage entity graph (links the business, FAQ and page for AI engines) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.bantupools.co.za/#website",
+        "url": "https://www.bantupools.co.za/",
+        "name": "Bantu Pools",
+        "inLanguage": "en-ZA",
+        "publisher": { "@id": "https://www.bantupools.co.za/#business" }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.bantupools.co.za/#webpage",
+        "url": "https://www.bantupools.co.za/",
+        "name": "Bantu Pools — Pool Cleaning, Repairs & Renovations in Johannesburg",
+        "inLanguage": "en-ZA",
+        "isPartOf": { "@id": "https://www.bantupools.co.za/#website" },
+        "about": { "@id": "https://www.bantupools.co.za/#business" },
+        "mainEntity": { "@id": "https://www.bantupools.co.za/#business" },
+        "primaryImageOfPage": { "@type": "ImageObject", "url": "https://www.bantupools.co.za/assets/img/og-image.jpg" },
+        "dateModified": "2026-09-20"
+      }
+    ]
+  }
+  </script>
+
   <!-- FAQ Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    "@id": "https://www.bantupools.co.za/#faq",
+    "inLanguage": "en-ZA",
+    "about": { "@id": "https://www.bantupools.co.za/#business" },
+    "isPartOf": { "@id": "https://www.bantupools.co.za/#website" },
     "mainEntity": [
       {
         "@type": "Question",

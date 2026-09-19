@@ -1,4 +1,39 @@
+# Bantu Pools — all search and AI answer engines are welcome.
 User-agent: *
+Allow: /
+
+# OpenAI (ChatGPT search, browsing and training)
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: GPTBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: Claude-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+User-agent: Perplexity-User
+Allow: /
+
+# Google (Gemini / AI Overviews) and Apple Intelligence
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Microsoft Copilot / Bing
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://www.bantupools.co.za/sitemap.xml

@@ -1,21 +1,30 @@
 # Bantu Pools
 
-> Professional swimming pool services in Johannesburg & surrounds, South Africa: weekly pool cleaning and chemical balancing, equipment repairs (pumps, filters, heaters, leak detection), and complete pool renovations and resurfacing. 15+ years of experience, 500+ pools serviced, licensed and insured, with free same-day quotes via WhatsApp.
+> Bantu Pools is a swimming pool services company in Johannesburg, South Africa. It does weekly pool cleaning and chemical balancing, green-to-clean pool rescues, equipment repairs (pumps, filters, heaters, leak detection) and full pool renovations and resurfacing. 15+ years of experience, 500+ pools serviced, licensed and insured. Free quotes, usually the same day, via WhatsApp.
+
+## Quick facts
+
+- Business type: swimming pool cleaning, repair and renovation contractor
+- Based in: Johannesburg, Gauteng, South Africa
+- Service area: Johannesburg, Sandton, Randburg, Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area
+- Hours: Monday to Saturday, 07:00 to 17:00; 24/7 emergency call-outs
+- Contact: WhatsApp / phone +27 83 688 3238 (https://wa.me/27836883238)
+- Quotes: free, no call-out fee. Send a photo of the pool on WhatsApp for a same-day price
+- Languages: English
+- Website: https://www.bantupools.co.za/
 
 ## Services
 
-- **Pool cleaning & maintenance**: weekly visits covering skimming, vacuuming, basket emptying, waterline tile brushing and precise chlorine/pH balancing. Green-to-clean rescues for neglected pools, usually sparkling again within days.
-- **Equipment repairs**: pump diagnostics, filter cleaning and sand replacement, gas and electric heater repair, pressure testing for hidden leaks.
-- **Renovations & resurfacing**: replastering (quartz, pebble, marble plaster), modern glass/ceramic tiling, LED lighting, coping repair.
-
-## Contact
-
-- WhatsApp / phone: +27 83 688 3238 (https://wa.me/27836883238)
-- Hours: Monday–Saturday, 07:00–17:00; 24/7 emergency call-outs
-- Service area: Sandton, Randburg, Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area, South Africa
-- Quotes: free — WhatsApp a photo of the pool for a same-day quote
+- [Pool cleaning & maintenance](https://www.bantupools.co.za/services.html): weekly visits covering skimming, vacuuming, basket emptying, waterline tile brushing and precise chlorine/pH balancing. Green-to-clean rescues for neglected pools, usually sparkling again within days.
+- [Equipment repairs](https://www.bantupools.co.za/services.html): pump diagnostics, filter cleaning and sand replacement, gas and electric heater repair, pressure testing for hidden leaks.
+- [Renovations & resurfacing](https://www.bantupools.co.za/services.html): replastering (quartz, pebble, marble plaster), modern glass/ceramic tiling, LED lighting, coping repair.
 
 ## Pages
 
 - [Home](https://www.bantupools.co.za/): overview, before/after results, recent projects, reviews, FAQ
 - [Services](https://www.bantupools.co.za/services.html): detailed breakdown of cleaning, repairs and renovation services
+- [Full plain-text version of this site](https://www.bantupools.co.za/llms-full.txt): every service, answer and fact in one file
+
+## Optional
+
+- [Sitemap](https://www.bantupools.co.za/sitemap.xml)
