@@ -2,11 +2,13 @@
 
 Local implementation; deployment is reserved for Claude.
 
-The section at `#johannesburg-pool-care` blends four matched photographic keyframes over 121 scrub positions. These are generated concept images, not footage of a client job or 121 independently generated animation frames. The page discloses this beside the controls. There can be slight scene drift during dissolves because the keyframes were generated independently.
+The section at `#johannesburg-pool-care` blends four matched photographic keyframes continuously during scrolling, with 110 ms time-based damping and eased dissolves between stages. The manual slider retains 121 precise positions. These are generated concept images, not footage of a client job or 121 independently generated animation frames. The page discloses this beside the controls. There can be slight scene drift during dissolves because the keyframes were generated independently.
 
-Scroll advances the scene; scrolling back reverses it. The range control supports keyboard arrows, Home and End. Manual scrubbing pauses scroll control; Resume restores it. Reduced-motion and short viewports disable scroll-driven updates and initially show the final scene. Without JavaScript, canvas support, or a complete image load, the original static image remains visible.
+Scroll advances the scene; scrolling back reverses it. The range control supports keyboard arrows, Home and End. Manual scrubbing pauses scroll control; Resume restores it. Reduced-motion and short viewports disable scroll-driven updates and initially show the final scene. Without JavaScript, video support, or a loaded video file, the static `johannesburg-pool-dusk` WebP remains visible.
 
-Four 960px WebP images total about 455 KiB on mobile; the desktop 1600px set totals about 999 KiB. They load within 800px of the section. Canvas pixel density is capped at 1.5. Rebuild JavaScript with `npm run build`; regenerate only sequence WebPs with `python scripts/optimize_sequence.py` (Pillow required).
+The scene plays from `assets/video/pool-story-desktop.mp4` (about 2.4 MB) or `pool-story-mobile.mp4` (about 1.1 MB) at 680px wide and below. The video loads within 800px of the section, and the page does not use canvas. Rebuild JavaScript with `npm run build`, and check the site with `npm run check`.
+
+The `sequence-*` images and `scripts/optimize_sequence.py` predate the video scrub. The page no longer references them, so they can be removed once the owner confirms.
 
 ## Assets and generation
 

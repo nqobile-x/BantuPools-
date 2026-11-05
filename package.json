@@ -6,12 +6,13 @@
   "scripts": {
     "build": "tsc",
     "dev": "npx -y concurrently \"tsc --watch\" \"npx -y serve -l 8080\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && python scripts/check_site.py ."
   },
   "devDependencies": {
     "typescript": "^5.7.0"
   },
   "dependencies": {
-    "lenis": "^1.3.26"
+    "lenis": "^1.3.27"
   }
 }

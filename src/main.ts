@@ -1,7 +1,8 @@
 /**
  * Bantu Pools — Main TypeScript
- * Handles: nav, scroll reveals, stat counters, ARIA tabs,
- * before/after slider, gallery controls, privacy hardening.
+ * Handles: nav, scroll reveals, stat counters, ARIA tabs, before/after slider,
+ * scroll-scrubbed pool story, quick quote, footer year, theme toggle,
+ * privacy guard and smooth scroll.
  * All listeners attached via addEventListener — zero inline handlers.
  */
 
@@ -216,9 +217,40 @@ function initBeforeAfter(): void {
 }
 
 /* ================================================
-   7. SCROLL STORY — scroll-scrubbed video, motion-safe
+   6. SCROLL STORY — scroll-scrubbed video, motion-safe
    ================================================ */
-function initPoolStory(): void {
+
+const STORY_LABELS: readonly string[] = [
+  '01 / A fresh start',
+  '02 / Restore the finish',
+  '03 / Bring back the blue',
+  '04 / Enjoy the evening',
+];
+
+/** Slider range is 0 to STORY_STEPS. Keep in sync with the input's max in index.html. */
+const STORY_STEPS = 120;
+
+/**
+ * Moves `current` toward `target`. Time-based, so the glide feels the same on
+ * 60 Hz and high-refresh screens. Smooth scroll gets a tighter follow.
+ */
+function dampProgress(current: number, target: number, elapsedMs: number, smoothScroll: boolean): number {
+  return current + (target - current) * (1 - Math.exp(-elapsedMs / (smoothScroll ? 45 : 110)));
+}
+
+/** Resolves once the first frame is decoded. Rejects if the file cannot be loaded. */
+function loadStoryVideo(video: HTMLVideoElement, src: string): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    video.addEventListener('loadeddata', () => resolve(), { once: true });
+    video.addEventListener('error', () => reject(new Error('video failed')), { once: true });
+    video.src = src;
+    video.load();
+    // iOS only decodes a first frame once playback has been attempted.
+    video.play().then(() => video.pause()).catch(() => undefined);
+  });
+}
+
+function initPoolStory(smoothScroll: boolean): void {
   const story = document.querySelector<HTMLElement>('.pool-story');
   const video = story?.querySelector<HTMLVideoElement>('video');
   const controls = story?.querySelector<HTMLElement>('.pool-story__controls');
@@ -226,74 +258,76 @@ function initPoolStory(): void {
   const mode = document.querySelector<HTMLButtonElement>('#storyScrollMode');
   const stage = document.getElementById('storyStage');
   if (!story || !video || !controls || !slider || !mode || !stage) return;
+
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   const shortScreen = window.matchMedia('(max-height: 640px)');
-  const labels = ['01 / A fresh start', '02 / Restore the finish', '03 / Bring back the blue', '04 / Enjoy the evening'];
   let duration = 0;
   let progress = 0;
   let paused = false;
-  let tick = 0;
+  let frame = 0;
   let lastTime = 0;
+
+  /* Scroll drives the scene only when motion is welcome and the screen is tall enough */
+  const scrollDriven = (): boolean => !reduced.matches && !shortScreen.matches;
+
   const syncMode = (): void => {
-    mode.hidden = reduced.matches || shortScreen.matches;
+    mode.hidden = !scrollDriven();
     mode.textContent = paused ? 'Resume scroll animation' : 'Pause scroll animation';
     mode.setAttribute('aria-pressed', String(paused));
   };
+
   const draw = (): void => {
     if (!duration) return;
     const time = Math.min(duration - 0.04, progress * duration);
     if (Math.abs(video.currentTime - time) > 0.008) video.currentTime = time;
-    const label = labels[Math.round(progress * (labels.length - 1))];
+    const label = STORY_LABELS[Math.round(progress * (STORY_LABELS.length - 1))];
     stage.textContent = label;
-    slider.value = String(Math.round(progress * 120));
+    slider.value = String(Math.round(progress * STORY_STEPS));
     slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent — ${label.slice(5)}`);
     video.dataset.frame = slider.value;
   };
+
   const update = (now: number): void => {
-    tick = 0;
+    frame = 0;
     if (!duration) return;
     let settling = false;
-    if (!paused && !reduced.matches && !shortScreen.matches) {
+    if (!paused && scrollDriven()) {
       const distance = Math.max(1, story.offsetHeight - video.clientHeight);
       const target = Math.min(1, Math.max(0, -story.getBoundingClientRect().top / distance));
       const elapsed = lastTime ? Math.min(64, now - lastTime) : 16.67;
-      // Time-based damping feels consistent on 60 Hz and high-refresh screens.
-      progress += (target - progress) * (1 - Math.exp(-elapsed / (smoothScrollActive ? 45 : 110)));
-      settling = Math.abs(target - progress) > .0001;
+      progress = dampProgress(progress, target, elapsed, smoothScroll);
+      settling = Math.abs(target - progress) > 0.0001;
       if (!settling) progress = target;
     }
     draw();
     lastTime = settling ? now : 0;
-    if (settling) tick = requestAnimationFrame(update);
+    if (settling) frame = requestAnimationFrame(update);
   };
-  const request = (): void => { if (!tick) tick = requestAnimationFrame(update); };
+
+  const request = (): void => { if (!frame) frame = requestAnimationFrame(update); };
+
   slider.addEventListener('input', () => {
     paused = true;
-    if (tick) cancelAnimationFrame(tick);
-    tick = 0;
+    cancelAnimationFrame(frame);
+    frame = 0;
     lastTime = 0;
-    progress = Number(slider.value) / 120;
+    progress = Number(slider.value) / STORY_STEPS;
     syncMode();
     draw();
   });
+
   mode.addEventListener('click', () => { paused = !paused; syncMode(); request(); });
+
   const load = async (): Promise<void> => {
     const size = window.innerWidth <= 680 ? 'mobile' : 'desktop';
     try {
-      await new Promise<void>((resolve, reject) => {
-        video.addEventListener('loadeddata', () => resolve(), { once: true });
-        video.addEventListener('error', () => reject(new Error('video failed')), { once: true });
-        video.src = `assets/video/pool-story-${size}.mp4`;
-        video.load();
-        // iOS only decodes a first frame once playback has been attempted.
-        video.play().then(() => video.pause()).catch(() => undefined);
-      });
+      await loadStoryVideo(video, `assets/video/pool-story-${size}.mp4`);
       video.pause();
       duration = video.duration;
       video.hidden = false;
       controls.hidden = false;
       story.classList.add('pool-story--ready');
-      if (reduced.matches || shortScreen.matches) progress = 1;
+      if (!scrollDriven()) progress = 1;
       draw();
       request();
       window.addEventListener('scroll', request, { passive: true });
@@ -306,6 +340,7 @@ function initPoolStory(): void {
       duration = 0;
     }
   };
+
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
       if (entries.some((entry) => entry.isIntersecting)) { observer.disconnect(); void load(); }
@@ -315,23 +350,37 @@ function initPoolStory(): void {
 }
 
 /* ================================================
-   8. QUICK QUOTE — passes context into WhatsApp
+   7. QUICK QUOTE — passes context into WhatsApp
    ================================================ */
+
+/** Matches the input's maxlength in index.html. Keeps the wa.me URL short. */
+const AREA_MAX_LENGTH = 60;
+
 function initQuoteBuilder(): void {
   const form = document.getElementById('quoteBuilder') as HTMLFormElement | null;
-  if (!form) return;
-  form.addEventListener('submit', (event) => {
+  const areaInput = document.getElementById('quoteArea') as HTMLInputElement | null;
+  if (!form || !areaInput) return;
+
+  areaInput.addEventListener('input', () => areaInput.setCustomValidity(''));
+
+  form.addEventListener('submit', (event: Event) => {
     event.preventDefault();
     const data = new FormData(form);
     const service = String(data.get('service') ?? 'pool help');
-    const area = String(data.get('area') ?? '').trim();
+    // `required` accepts whitespace-only input, so check the cleaned value here.
+    const area = String(data.get('area') ?? '').replace(/\s+/g, ' ').trim().slice(0, AREA_MAX_LENGTH).trim();
+    if (!area) {
+      areaInput.setCustomValidity('Enter your suburb or area.');
+      form.reportValidity();
+      return;
+    }
     const message = `Hi Bantu Pools, I need help with ${service}. My area is ${area}. I can send a photo for a free quote.`;
     window.open(`https://wa.me/27836883238?text=${encodeURIComponent(message)}`, '_blank', 'noopener');
   });
 }
 
 /* ================================================
-   7. FOOTER YEAR
+   8. FOOTER YEAR
    ================================================ */
 
 function initYear(): void {
@@ -340,7 +389,7 @@ function initYear(): void {
 }
 
 /* ================================================
-   8. THEME TOGGLE (dark / light)
+   9. THEME TOGGLE (dark / light)
    ================================================ */
 
 /**
@@ -377,7 +426,7 @@ function initThemeToggle(): void {
 }
 
 /* ================================================
-   9. PRIVACY GUARD
+   10. PRIVACY GUARD
    ================================================ */
 
 /** Blocks common privacy-leakage vectors at runtime. */
@@ -413,11 +462,10 @@ function initPrivacyGuard(): void {
 interface LenisInstance { raf(time: number): void; }
 declare const Lenis: (new (options: Record<string, unknown>) => LenisInstance) | undefined;
 
-let smoothScrollActive = false;
-
-function initSmoothScroll(): void {
-  if (typeof Lenis === 'undefined') return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+/** Returns true when Lenis is running, so other scroll code can tune itself to it. */
+function initSmoothScroll(): boolean {
+  if (typeof Lenis === 'undefined') return false;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
 
   const lenis = new Lenis({
     duration: 1.15,
@@ -425,7 +473,6 @@ function initSmoothScroll(): void {
     smoothWheel: true,
     anchors: true,
   });
-  smoothScrollActive = true;
   document.documentElement.classList.add('lenis-active');
 
   const raf = (time: number): void => {
@@ -433,6 +480,7 @@ function initSmoothScroll(): void {
     requestAnimationFrame(raf);
   };
   requestAnimationFrame(raf);
+  return true;
 }
 
 /* ================================================
@@ -440,14 +488,14 @@ function initSmoothScroll(): void {
    ================================================ */
 
 document.addEventListener('DOMContentLoaded', (): void => {
-  initSmoothScroll();
+  const smoothScroll: boolean = initSmoothScroll();
   initPrivacyGuard();
   initNav();
   initReveals();
   initStatCounters();
   initServiceTabs();
   initBeforeAfter();
-  initPoolStory();
+  initPoolStory(smoothScroll);
   initQuoteBuilder();
   initYear();
   initThemeToggle();
