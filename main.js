@@ -217,6 +217,7 @@ function initPoolStory(smoothScroll) {
     const stage = document.getElementById('storyStage');
     if (!story || !video || !controls || !slider || !mode || !stage)
         return;
+    const steps = Array.from(controls.querySelectorAll('.pool-story__step'));
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
     const shortScreen = window.matchMedia('(max-height: 640px)');
     let duration = 0;
@@ -237,11 +238,28 @@ function initPoolStory(smoothScroll) {
         const time = Math.min(duration - 0.04, progress * duration);
         if (Math.abs(video.currentTime - time) > 0.008)
             video.currentTime = time;
-        const label = STORY_LABELS[Math.round(progress * (STORY_LABELS.length - 1))];
+        const stepIndex = Math.round(progress * (STORY_LABELS.length - 1));
+        const label = STORY_LABELS[stepIndex];
         stage.textContent = label;
         slider.value = String(Math.round(progress * STORY_STEPS));
         slider.setAttribute('aria-valuetext', `${Math.round(progress * 100)} percent — ${label.slice(5)}`);
+        controls.style.setProperty('--story-progress', `${(progress * 100).toFixed(2)}%`);
+        steps.forEach((btn, idx) => {
+            if (idx === stepIndex)
+                btn.setAttribute('aria-current', 'step');
+            else
+                btn.removeAttribute('aria-current');
+        });
         video.dataset.frame = slider.value;
+    };
+    const setManualProgress = (nextProgress) => {
+        paused = true;
+        cancelAnimationFrame(frame);
+        frame = 0;
+        lastTime = 0;
+        progress = Math.min(1, Math.max(0, nextProgress));
+        syncMode();
+        draw();
     };
     const update = (now) => {
         frame = 0;
@@ -265,13 +283,12 @@ function initPoolStory(smoothScroll) {
     const request = () => { if (!frame)
         frame = requestAnimationFrame(update); };
     slider.addEventListener('input', () => {
-        paused = true;
-        cancelAnimationFrame(frame);
-        frame = 0;
-        lastTime = 0;
-        progress = Number(slider.value) / STORY_STEPS;
-        syncMode();
-        draw();
+        setManualProgress(Number(slider.value) / STORY_STEPS);
+    });
+    steps.forEach((btn, idx) => {
+        btn.addEventListener('click', () => {
+            setManualProgress(idx / Math.max(1, STORY_LABELS.length - 1));
+        });
     });
     mode.addEventListener('click', () => { paused = !paused; syncMode(); request(); });
     const load = async () => {

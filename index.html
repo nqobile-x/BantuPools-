@@ -532,10 +532,13 @@
 
         <div class="ba-grid">
           <div class="reveal">
-            <p class="ba-grid__label">Rescue 2</p>
+            <div class="ba-grid__meta">
+              <span class="ba-grid__step">02 / Courtyard rescue</span>
+              <span class="ba-grid__tag">Algae to crystal blue</span>
+            </div>
             <div class="ba">
-              <img src="assets/img/rescue-b1-640.webp" srcset="assets/img/rescue-b1-640.webp 640w, assets/img/rescue-b1-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="Neglected residential pool with green algae water, overgrown garden and debris — before treatment" width="960" height="536" loading="lazy" decoding="async">
-              <img class="ba__after" src="assets/img/rescue-a1-640.webp" srcset="assets/img/rescue-a1-640.webp 640w, assets/img/rescue-a1-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="The same pool with crystal-clear blue water, a technician reading chemical test results" width="960" height="536" loading="lazy" decoding="async">
+              <img src="assets/img/stone-courtyard-before-640.webp" srcset="assets/img/stone-courtyard-before-640.webp 640w, assets/img/stone-courtyard-before-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="Neglected stone-courtyard swimming pool filled with dark green algae and floating leaves before treatment" width="960" height="536" loading="lazy" decoding="async">
+              <img class="ba__after" src="assets/img/stone-courtyard-640.webp" srcset="assets/img/stone-courtyard-640.webp 640w, assets/img/stone-courtyard-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="The same stone-courtyard pool restored to sparkling turquoise water with clean mosaic tile and flagstone coping" width="960" height="536" loading="lazy" decoding="async">
               <div class="ba__divider" aria-hidden="true">
                 <div class="ba__handle">
                   <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
@@ -544,15 +547,18 @@
               </div>
               <span class="ba__chip ba__chip--after">After</span>
               <span class="ba__chip ba__chip--before">Before</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after: slide to reveal the cleaned pool">
+              <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after: slide to reveal the restored courtyard pool">
             </div>
           </div>
 
           <div class="reveal d1">
-            <p class="ba-grid__label">Rescue 3</p>
+            <div class="ba-grid__meta">
+              <span class="ba-grid__step">03 / Full shell &amp; water restore</span>
+              <span class="ba-grid__tag">Northern Suburbs</span>
+            </div>
             <div class="ba">
-              <img src="assets/img/rescue-b2-640.webp" srcset="assets/img/rescue-b2-640.webp 640w, assets/img/rescue-b2-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="Another neglected residential pool full of green algae and floating leaves — before treatment" width="960" height="536" loading="lazy" decoding="async">
-              <img class="ba__after" src="assets/img/pool-clean-640.webp" srcset="assets/img/pool-clean-640.webp 640w, assets/img/pool-clean-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="Restored pool with sparkling turquoise water and a technician completing the service" width="960" height="536" loading="lazy" decoding="async">
+              <img src="assets/img/sequence-before-640.webp" srcset="assets/img/sequence-before-640.webp 640w, assets/img/sequence-before-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="Freeform residential pool in Johannesburg with green algae water and weathered stone coping before restoration" width="960" height="540" loading="lazy" decoding="async">
+              <img class="ba__after" src="assets/img/sequence-clear-640.webp" srcset="assets/img/sequence-clear-640.webp 640w, assets/img/sequence-clear-960.webp 960w" sizes="(max-width: 640px) 100vw, 50vw" alt="The same freeform Johannesburg pool after restoration with immaculate pale stone coping and crystal-clear blue water" width="960" height="540" loading="lazy" decoding="async">
               <div class="ba__divider" aria-hidden="true">
                 <div class="ba__handle">
                   <svg class="icon" aria-hidden="true"><use href="#i-chevron-left"/></svg>
@@ -561,7 +567,7 @@
               </div>
               <span class="ba__chip ba__chip--after">After</span>
               <span class="ba__chip ba__chip--before">Before</span>
-              <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after: slide to reveal the cleaned pool">
+              <input class="ba__range" type="range" min="0" max="100" value="50" step="0.1" aria-label="Compare before and after: slide to reveal the restored freeform pool">
             </div>
           </div>
         </div>
@@ -584,9 +590,21 @@
           <a class="btn btn--primary" href="https://wa.me/27836883238?text=Hi%20Bantu%20Pools%2C%20I%27d%20like%20a%20free%20quote%20for%20my%20pool." target="_blank" rel="noopener noreferrer">Check my area <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
         </div>
         <div class="pool-story__controls" hidden>
-          <div class="pool-story__stage"><span id="storyStage">01 / Before</span><span>Scroll or drag to explore</span></div>
+          <div class="pool-story__stage">
+            <span id="storyStage">01 / A fresh start</span>
+            <span class="pool-story__hint">Scroll, drag or pick a stage</span>
+          </div>
+          <div class="pool-story__steps" role="group" aria-label="Transformation stages">
+            <button type="button" class="pool-story__step" data-story-step="0" aria-current="step"><span>01</span> Fresh start</button>
+            <button type="button" class="pool-story__step" data-story-step="1"><span>02</span> Restore finish</button>
+            <button type="button" class="pool-story__step" data-story-step="2"><span>03</span> Bring back blue</button>
+            <button type="button" class="pool-story__step" data-story-step="3"><span>04</span> Evening glow</button>
+          </div>
           <input id="storyScrubber" type="range" min="0" max="120" value="0" step="1" aria-label="Explore the pool transformation">
-          <div class="pool-story__control-footer"><button id="storyScrollMode" type="button">Pause scroll animation</button></div>
+          <div class="pool-story__control-footer">
+            <span class="pool-story__micro">Concept illustration · 4 restoration stages</span>
+            <button id="storyScrollMode" type="button">Pause scroll animation</button>
+          </div>
         </div>
       </div>
     </section>
@@ -673,70 +691,63 @@
             <figure class="gallery__card reveal">
               <img src="assets/img/reno-cape-960.webp" srcset="assets/img/reno-cape-640.webp 640w, assets/img/reno-cape-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Luxury swimming pool with crystal-clear blue water, palm trees and mountain views on a bright South African day" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Luxury renovation</strong>
+                <strong><em>01</em> Luxury renovation</strong>
                 <span>Full transformation</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d1">
               <img src="assets/img/reno-karoo-960.webp" srcset="assets/img/reno-karoo-640.webp 640w, assets/img/reno-karoo-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Night-time luxury pool renovation reveal — geometric pool with blue LED lighting, fire pit and Johannesburg city skyline" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Renovation reveal</strong>
+                <strong><em>02</em> Renovation reveal</strong>
                 <span>Johannesburg luxury</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d2">
-              <img src="assets/img/repairs-960.webp" srcset="assets/img/repairs-640.webp 640w, assets/img/repairs-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Pool technician in blue gloves grouting and repairing cracked tiles at the pool waterline" width="960" height="536" loading="lazy" decoding="async">
+              <img src="assets/img/waterline-scrub-960.webp" srcset="assets/img/waterline-scrub-640.webp 640w, assets/img/waterline-scrub-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Bantu Pools technician in the water scrubbing mosaic waterline tiles to remove calcium build-up" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Tile repairs</strong>
-                <span>Repairs &amp; maintenance</span>
+                <strong><em>03</em> Waterline care</strong>
+                <span>Tile brushing &amp; balance</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal">
               <img src="assets/img/scrub-960.webp" srcset="assets/img/scrub-640.webp 640w, assets/img/scrub-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Pool technician in black gloves applying sealant to cracked pool coping tiles with crystal-clear water visible" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Coping repair</strong>
+                <strong><em>04</em> Coping repair</strong>
                 <span>Full service visit</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d1">
-              <img src="assets/img/construction-960.webp" srcset="assets/img/construction-640.webp 640w, assets/img/construction-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Two workers chipping and resurfacing the interior shell of an empty pool, with new tiles stacked on the coping" width="960" height="536" loading="lazy" decoding="async">
+              <img src="assets/img/sequence-restore-960.webp" srcset="assets/img/sequence-restore-640.webp 640w, assets/img/sequence-restore-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Drained freeform concrete pool shell prepared for marble plaster resurfacing with tile samples stacked on the coping" width="960" height="540" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Resurfacing</strong>
-                <span>In progress</span>
+                <strong><em>05</em> Shell preparation</strong>
+                <span>Resurfacing stage</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d2">
-              <img src="assets/img/cleaning-960.webp" srcset="assets/img/cleaning-640.webp 640w, assets/img/cleaning-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Bantu Pools technician testing water chemistry beside a perfectly restored turquoise pool in a neat residential garden" width="960" height="536" loading="lazy" decoding="async">
+              <img src="assets/img/stone-courtyard-960.webp" srcset="assets/img/stone-courtyard-640.webp 640w, assets/img/stone-courtyard-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Restored courtyard pool with sparkling turquoise water, natural stone paving and indigenous aloes" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Green-to-clean</strong>
-                <span>Chemical restore</span>
+                <strong><em>06</em> Courtyard oasis</strong>
+                <span>Green-to-clean restore</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal">
               <img src="assets/img/pool-luxury-960.webp" srcset="assets/img/pool-luxury-640.webp 640w, assets/img/pool-luxury-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Crystal-clear luxury pool with natural stone coping, lush tropical garden and panoramic mountain views" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Crystal clear</strong>
+                <strong><em>07</em> Crystal clear</strong>
                 <span>Weekly maintenance</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d1">
               <img src="assets/img/pool-golden-960.webp" srcset="assets/img/pool-golden-640.webp 640w, assets/img/pool-golden-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Golden-hour swimming pool with agapanthus and palm trees, warm sunset light reflecting across the water" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Golden hour</strong>
+                <strong><em>08</em> Golden hour</strong>
                 <span>Pool maintenance</span>
               </figcaption>
             </figure>
             <figure class="gallery__card reveal d2">
-              <img src="assets/img/rescue-b3-960.webp" srcset="assets/img/rescue-b3-640.webp 640w, assets/img/rescue-b3-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Severely neglected pool with broken cover, heavy debris and algae-green water, awaiting a Bantu Pools rescue" width="960" height="536" loading="lazy" decoding="async">
-              <figcaption class="gallery__caption">
-                <strong>Before we arrived</strong>
-                <span>Green pool rescue</span>
-              </figcaption>
-            </figure>
-            <figure class="gallery__card reveal">
               <img src="assets/img/repair-detail-960.webp" srcset="assets/img/repair-detail-640.webp 640w, assets/img/repair-detail-960.webp 960w" sizes="(max-width: 480px) 100vw, (max-width: 900px) 50vw, 33vw" alt="Close-up of pool technician in navy uniform repairing pool tile at the waterline edge" width="960" height="536" loading="lazy" decoding="async">
               <figcaption class="gallery__caption">
-                <strong>Expert repairs</strong>
+                <strong><em>09</em> Expert repairs</strong>
                 <span>Tile &amp; waterline</span>
               </figcaption>
             </figure>
@@ -748,18 +759,42 @@
     <!-- ===== ABOUT ===== -->
     <section class="section" id="about">
       <div class="container">
-        <div class="section-head">
-          <p class="eyebrow reveal">About us</p>
-          <h2 class="section-title reveal d1">Who is Bantu Pools?</h2>
-          <p class="section-sub reveal d2">
-            Bantu Pools is a licensed and insured swimming pool service company based in Johannesburg,
-            South Africa, with over 15 years of experience and more than 500 pools serviced. We provide
-            weekly pool cleaning and chemical balancing, equipment repairs (pumps, filters, heaters and
-            leak detection), and complete pool renovations and resurfacing across Sandton, Randburg,
-            Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area. Quotes
-            are free via WhatsApp on +27&nbsp;83&nbsp;688&nbsp;3238, usually answered the same day, and
-            emergency call-outs are available 24/7.
-          </p>
+        <div class="about-grid">
+          <div class="section-head about-grid__copy">
+            <p class="eyebrow reveal">About us</p>
+            <h2 class="section-title reveal d1">Who is Bantu Pools?</h2>
+            <p class="section-sub reveal d2">
+              Bantu Pools is a licensed and insured swimming pool service company based in Johannesburg,
+              South Africa, with over 15 years of experience and more than 500 pools serviced. We provide
+              weekly pool cleaning and chemical balancing, equipment repairs (pumps, filters, heaters and
+              leak detection), and complete pool renovations and resurfacing across Sandton, Randburg,
+              Fourways, Midrand, Roodepoort, Bryanston, Soweto and the greater Johannesburg area. Quotes
+              are free via WhatsApp on +27&nbsp;83&nbsp;688&nbsp;3238, usually answered the same day, and
+              emergency call-outs are available 24/7.
+            </p>
+            <div class="about-pillars reveal d3">
+              <div class="about-pillar">
+                <span class="about-pillar__num">01</span>
+                <span>Dedicated crew for water, tile &amp; pump room</span>
+              </div>
+              <div class="about-pillar">
+                <span class="about-pillar__num">02</span>
+                <span>Same-day photo quotes with zero call-out fee</span>
+              </div>
+              <div class="about-pillar">
+                <span class="about-pillar__num">03</span>
+                <span>Licensed, insured &amp; trusted across Johannesburg</span>
+              </div>
+            </div>
+          </div>
+
+          <figure class="about-media reveal d2">
+            <img src="assets/img/team-service-960.webp" srcset="assets/img/team-service-640.webp 640w, assets/img/team-service-960.webp 960w" sizes="(max-width: 900px) 100vw, 48vw" alt="Three Bantu Pools technicians in navy uniforms servicing a residential pool — brushing waterline tiles, vacuuming the floor and inspecting the pump and filter" width="960" height="536" loading="lazy" decoding="async">
+            <figcaption class="about-media__badge">
+              <span>Full-service crew</span>
+              <strong>Cleaning · Repairs · Renovations</strong>
+            </figcaption>
+          </figure>
         </div>
       </div>
     </section>

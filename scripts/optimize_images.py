@@ -45,10 +45,19 @@ PHOTOS = [
     ("Images/Neglected_residential_swimming_pool_with_202606241748.jpeg",     "rescue-b3",     [960, 640],            False),
     ("Images/Same_residential_swimming_pool_now_202606241752 (1).jpeg",       "rescue-a1",     [960, 640],            False),
     # Third close-up repair shot for gallery
-    ("Images/Close-up_of_a_professional_pool_202606241753.jpeg",              "repair-detail", [960, 640],            False),
+    ("Images/Close-up_of_a_professional_pool_202606241753.jpeg",              "repair-detail",   [960, 640],            False),
+    # Additional team and pool photography from assets/
+    ("assets/repairs-and-maintainance.png",                                   "team-service",           [960, 640],            False),
+    ("assets/bantu-pools-pool-clean.png",                                     "waterline-scrub",        [960, 640],            False),
+    ("assets/dirty-pool.png",                                                 "stone-courtyard-before", [960, 640],            False),
+    ("assets/reno-pool.png",                                                  "stone-courtyard",        [960, 640],            False),
     # Scroll-sequence pool story images
-    ("assets/img/johannesburg-pool-dusk.png",    "johannesburg-pool-dusk",    [1600, 960], False),
-    ("assets/img/johannesburg-pool-morning.png", "johannesburg-pool-morning", [1200, 720], False),
+    ("assets/img/johannesburg-pool-dusk.png",    "johannesburg-pool-dusk",    [1600, 960],      False),
+    ("assets/img/johannesburg-pool-morning.png", "johannesburg-pool-morning", [1200, 720],      False),
+    ("assets/img/sequence-before.png",           "sequence-before",           [1600, 960, 640], False),
+    ("assets/img/sequence-restore.png",          "sequence-restore",          [1600, 960, 640], False),
+    ("assets/img/sequence-clear.png",            "sequence-clear",            [1600, 960, 640], False),
+    ("assets/img/johannesburg-pool-dusk.png",    "sequence-dusk",             [1600, 960, 640], False),
 ]
 
 QUALITY = 80
